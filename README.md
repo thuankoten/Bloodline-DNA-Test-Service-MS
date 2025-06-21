@@ -1,1 +1,2 @@
 # Bloodline-DNA-Test-Service-MS
+Bloodline DNA Test Service Management System is a comprehensive platform designed to streamline and manage all aspects of DNA testing services. From customer registration and sample tracking to result delivery and data security, the system ensures accuracy, efficiency, and confidentiality at every stage. Built with a user-friendly interface and robust backend management tools, it empowers laboratories and healthcare providers to deliver reliable genetic insights while maintaining compliance with industry standards.
