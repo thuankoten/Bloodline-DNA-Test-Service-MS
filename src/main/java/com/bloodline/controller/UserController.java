@@ -28,12 +28,11 @@ public class UserController {
 
             String firstName = jsonRequest.optString("firstName", null);
             String lastName = jsonRequest.optString("lastName", null);
-            String email = jsonRequest.optString("email", null); // <-- Đã sửa lại đúng tên trường
+            String email = jsonRequest.optString("email", null);
             String phone = jsonRequest.optString("phone", null);
             String username = jsonRequest.optString("username", null);
             String password = jsonRequest.optString("password", null);
 
-            // Kiểm tra thiếu dữ liệu
             if (firstName == null || firstName.trim().isEmpty() ||
                 lastName == null || lastName.trim().isEmpty() ||
                 email == null || email.trim().isEmpty() ||
@@ -45,7 +44,6 @@ public class UserController {
                                    .toString();
             }
 
-            // Kiểm tra trùng lặp
             if (userRepository.existsByEmail(email)) {
                 return jsonResponse.put("success", false)
                                    .put("message", "Email đã được sử dụng!")
@@ -64,7 +62,6 @@ public class UserController {
                                    .toString();
             }
 
-            // Tạo user mới
             User user = new User(firstName, lastName, email, phone, username, hashPassword(password));
             userRepository.save(user);
 
@@ -78,6 +75,33 @@ public class UserController {
                                .put("message", "Lỗi hệ thống: " + e.getMessage())
                                .toString();
         }
+    }
+
+    @GetMapping("/user")
+    public String getUserInfo(@RequestParam("username") String username) {
+        JSONObject response = new JSONObject();
+
+        try {
+            User user = userRepository.findByUsername(username);
+            if (user == null) {
+                response.put("success", false);
+                response.put("message", "Không tìm thấy người dùng.");
+            } else {
+                JSONObject userData = new JSONObject();
+                userData.put("fullName", user.getFirstName() + " " + user.getLastName());
+                userData.put("email", user.getEmail());
+                userData.put("phone", user.getPhone());
+
+                response.put("success", true);
+                response.put("user", userData);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.put("success", false);
+            response.put("message", "Lỗi hệ thống: " + e.getMessage());
+        }
+
+        return response.toString();
     }
 
     private String hashPassword(String password) throws NoSuchAlgorithmException {
@@ -95,4 +119,37 @@ public class UserController {
         }
         return hexString.toString();
     }
+
+    @PostMapping("/change-password")
+public String changePassword(@RequestBody String body) {
+    JSONObject response = new JSONObject();
+
+    try {
+        JSONObject json = new JSONObject(body);
+        String username = json.optString("username");
+        String newPassword = json.optString("newPassword");
+
+        if (username == null || username.isEmpty() || newPassword == null || newPassword.isEmpty()) {
+            return response.put("success", false)
+                           .put("message", "Thiếu thông tin.").toString();
+        }
+
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            return response.put("success", false)
+                           .put("message", "Không tìm thấy người dùng.").toString();
+        }
+
+        user.setPassword(hashPassword(newPassword));
+        userRepository.save(user);
+
+        return response.put("success", true)
+                       .put("message", "Đổi mật khẩu thành công.").toString();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        return response.put("success", false)
+                       .put("message", "Lỗi hệ thống: " + e.getMessage()).toString();
+    }
+}
 }
