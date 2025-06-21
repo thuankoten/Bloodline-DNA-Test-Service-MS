@@ -27,12 +27,19 @@ public class User {
 
     @Column(name = "phone")
     private String phone;
+    
+    // Thêm trường role
+    @Column(name = "role")
+    private String role = "customer"; // Mặc định là customer
+    
+    @Column(name = "active")
+    private boolean active = true; // Mặc định là active
 
     // Constructor mặc định (bắt buộc cho JPA)
     public User() {
     }
 
-    // Constructor đầy đủ tham số
+    // Constructor cho customer (giữ nguyên tương thích)
     public User(String firstName, String lastName, String email, String phone, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -40,6 +47,20 @@ public class User {
         this.phone = phone;
         this.username = username;
         this.password = password;
+        this.role = "customer";
+        this.active = true;
+    }
+    
+    // Constructor có role
+    public User(String firstName, String lastName, String email, String phone, String username, String password, String role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.active = true;
     }
 
     // Getters & Setters
@@ -97,5 +118,26 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+    
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+    
+    // Helper method để lấy tên đầy đủ
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
 }
