@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đặt lịch hẹn - Xét nghiệm DNA Bloodline</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/book-appointment.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <h1><i class="fas fa-dna"></i> Bloodline</h1>
+          <p>Dịch vụ xét nghiệm DNA</p>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="index.html#services">Dịch vụ</a></li>
+            <li><a href="index.html#about">Về chúng tôi</a></li>
+            <li><a href="index.html#contact">Liên hệ</a></li>
+            <li><a href="login.html" class="btn">Đăng nhập</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="booking-page">
+      <div class="container">
+        <h1 class="page-title">Đặt lịch hẹn của bạn</h1>
+
+        <div class="booking-form">
+          <form id="appointmentForm">
+            <div class="form-section">
+              <h3>Thông tin cá nhân</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="fullName">Họ và tên</label>
+                  <input type="text" id="fullName" name="fullName" required />
+                </div>
+                <div class="form-group">
+                  <label for="email">Địa chỉ Email</label>
+                  <input type="email" id="email" name="email" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="phone">Số điện thoại</label>
+                  <input type="tel" id="phone" name="phone" required />
+                </div>
+                <div class="form-group">
+                  <label for="dob">Ngày sinh</label>
+                  <input type="date" id="dob" name="dob" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h3>Chi tiết lịch hẹn</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="preferredDate">Ngày ưu tiên</label>
+                  <input
+                    type="date"
+                    id="preferredDate"
+                    name="preferredDate"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="preferredTime">Thời gian ưu tiên</label>
+                  <select id="preferredTime" name="preferredTime" required>
+                    <option value="">Chọn thời gian</option>
+                    <option value="09:00">09:00 SA</option>
+                    <option value="10:00">10:00 SA</option>
+                    <option value="11:00">11:00 SA</option>
+                    <option value="14:00">02:00 CH</option>
+                    <option value="15:00">03:00 CH</option>
+                    <option value="16:00">04:00 CH</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="notes">Ghi chú bổ sung</label>
+                <textarea id="notes" name="notes" rows="4"></textarea>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button
+                type="button"
+                class="btn btn-outline"
+                onclick="window.location.href='index.html'"
+              >
+                Hủy
+              </button>
+              <button type="submit" class="btn btn-primary">
+                Xác nhận đặt lịch
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Lấy loại dịch vụ từ URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const serviceType = urlParams.get("service");
+
+        // Thêm thông tin dịch vụ đã chọn vào biểu mẫu
+        if (serviceType) {
+          const serviceInfo = {
+            paternity: "Xét nghiệm DNA huyết thống",
+            relationship: "Xét nghiệm mối quan hệ gia đình",
+            forensic: "Xét nghiệm DNA pháp y",
+          };
+
+          // Tạo hiển thị lựa chọn dịch vụ
+          const serviceDisplay = document.createElement("div");
+          serviceDisplay.className = "selected-service";
+          serviceDisplay.innerHTML = `
+                    <h3>Dịch vụ đã chọn</h3>
+                    <p>${
+                      serviceInfo[serviceType] || "Dịch vụ không xác định"
+                    }</p>
+                `;
+
+          // Chèn vào đầu biểu mẫu đặt lịch
+          const form = document.getElementById("appointmentForm");
+          form.insertBefore(serviceDisplay, form.firstChild);
+        }
+
+        // Xử lý gửi biểu mẫu
+        document
+          .getElementById("appointmentForm")
+          .addEventListener("submit", function (e) {
+            e.preventDefault(); // Ngăn chặn hành vi gửi biểu mẫu mặc định
+            alert("Đặt lịch hẹn thành công!"); // Hiển thị thông báo xác nhận
+            window.location.href = "index.html"; // Chuyển hướng về trang chủ
+          });
+      });
+    </script>
+  </body>
+</html>

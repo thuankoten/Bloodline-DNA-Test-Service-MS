@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng điều khiển quản trị - Dịch vụ xét nghiệm DNA Bloodline</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="admin-page">
+    <header class="admin-header">
+        <div class="container">
+            <div class="logo">
+                <a href="admin-dashboard.html">
+                    <i class="fas fa-dna"></i> <span>Bloodline</span>
+                </a>
+                <span class="admin-badge">Bảng điều khiển quản trị</span>
+            </div>
+            
+            <div class="header-right">
+                <div class="search-bar">
+                    <input type="text" placeholder="Tìm kiếm...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="notification">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">5</span>
+                </div>
+                
+                <div class="user-menu">
+                    <img src="img/admin-avatar.jpg" alt="Ảnh đại diện quản trị viên" class="avatar">
+                    <div class="user-info">
+                        <span class="user-name">Người dùng quản trị</span>
+                        <span class="user-role">Quản trị viên hệ thống</span>
+                    </div>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="admin-wrapper">
+        <aside class="admin-sidebar">
+            <nav class="admin-nav">
+                <ul>
+                    <li class="active">
+                        <a href="admin-dashboard.html">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Bảng điều khiển</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-users.html">
+                            <i class="fas fa-users"></i>
+                            <span>Quản lý người dùng</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-tests.html">
+                            <i class="fas fa-vial"></i>
+                            <span>Quản lý xét nghiệm</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-samples.html">
+                            <i class="fas fa-flask"></i>
+                            <span>Theo dõi mẫu</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-results.html">
+                            <i class="fas fa-file-medical-alt"></i>
+                            <span>Kết quả xét nghiệm</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-lab.html">
+                            <i class="fas fa-microscope"></i>
+                            <span>Quản lý phòng thí nghiệm</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-reports.html">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Báo cáo & Phân tích</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-billing.html">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Thanh toán</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-settings.html">
+                            <i class="fas fa-cog"></i>
+                            <span>Cài đặt hệ thống</span>
+                        </a>
+                    </li>
+                    <li class="logout">
+                        <a href="login.html">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Đăng xuất</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <main class="admin-main">
+            <div class="page-header">
+                <h1>Bảng điều khiển quản trị</h1>
+                <p>Chào mừng đến với bảng điều khiển quản trị Dịch vụ xét nghiệm DNA Bloodline.</p>
+            </div>
+            
+            <div class="quick-stats">
+                <div class="stat-card">
+                    <div class="stat-icon users">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>2,458</h3>
+                        <p>Tổng số người dùng</p>
+                    </div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> 12%
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon tests">
+                        <i class="fas fa-vial"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>1,879</h3>
+                        <p>Tổng số xét nghiệm</p>
+                    </div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> 8%
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon revenue">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>$128,450</h3>
+                        <p>Doanh thu hàng tháng</p>
+                    </div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> 15%
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon pending">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>145</h3>
+                        <p>Mẫu đang chờ xử lý</p>
+                    </div>
+                    <div class="stat-change negative">
+                        <i class="fas fa-arrow-down"></i> 3%
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin-row">
+                <section class="revenue-chart">
+                    <div class="section-header">
+                        <h2>Tổng quan doanh thu</h2>
+                        <div class="period-selector">
+                            <button class="active">Hàng tháng</button>
+                            <button>Hàng quý</button>
+                            <button>Hàng năm</button>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </section>
+                
+                <section class="test-distribution">
+                    <div class="section-header">
+                        <h2>Phân phối xét nghiệm</h2>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="testDistributionChart"></canvas>
+                    </div>
+                    
+                    <div class="test-legend">
+                        <div class="legend-item">
+                            <span class="color-box" style="background-color: #4285F4;"></span>
+                            <div class="legend-text">
+                                <span class="test-type">Xét nghiệm Tổ tiên</span>
+                                <span class="percentage">45%</span>
+                            </div>
+                        </div>
+                        <div class="legend-item">
+                            <span class="color-box" style="background-color: #34A853;"></span>
+                            <div class="legend-text">
+                                <span class="test-type">Sàng lọc sức khỏe</span>
+                                <span class="percentage">30%</span>
+                            </div>
+                        </div>
+                        <div class="legend-item">
+                            <span class="color-box" style="background-color: #FBBC05;"></span>
+                            <div class="legend-text">
+                                <span class="test-type">Xét nghiệm huyết thống</span>
+                                <span class="percentage">15%</span>
+                            </div>
+                        </div>
+                        <div class="legend-item">
+                            <span class="color-box" style="background-color: #EA4335;"></span>
+                            <div class="legend-text">
+                                <span class="test-type">Xét nghiệm Pháp y</span>
+                                <span class="percentage">10%</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <section class="recent-tests">
+                <div class="section-header">
+                    <h2>Các đợt xét nghiệm gần đây</h2>
+                    <a href="admin-tests.html" class="view-all">Xem tất cả xét nghiệm</a>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Mã xét nghiệm</th>
+                                <th>Khách hàng</th>
+                                <th>Loại xét nghiệm</th>
+                                <th>Ngày gửi</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#BL2023-087</td>
+                                <td>
+                                    <div class="customer-info">
+                                        <img src="img/user1.jpg" alt="Khách hàng" class="small-avatar">
+                                        <span>Sarah Johnson</span>
+                                    </div>
+                                </td>
+                                <td>Xét nghiệm DNA Tổ tiên</td>
+                                <td>Ngày 18 tháng 11, 2023</td>
+                                <td><span class="status received">Đã nhận mẫu</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                                        <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#BL2023-086</td>
+                                <td>
+                                    <div class="customer-info">
+                                        <img src="img/user2.jpg" alt="Khách hàng" class="small-avatar">
+                                        <span>Michael Brown</span>
+                                    </div>
+                                </td>
+                                <td>Sàng lọc sức khỏe</td>
+                                <td>Ngày 17 tháng 11, 2023</td>
+                                <td><span class="status processing">Đang xử lý</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                                        <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#BL2023-085</td>
+                                <td>
+                                    <div class="customer-info">
+                                        <img src="img/user3.jpg" alt="Khách hàng" class="small-avatar">
+                                        <span>Emily Davis</span>
+                                    </div>
+                                </td>
+                                <td>Xét nghiệm huyết thống</td>
+                                <td>Ngày 16 tháng 11, 2023</td>
+                                <td><span class="status shipped">Đã gửi bộ kit</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                                        <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#BL2023-084</td>
+                                <td>
+                                    <div class="customer-info">
+                                        <img src="img/user4.jpg" alt="Khách hàng" class="small-avatar">
+                                        <span>James Wilson</span>
+                                    </div>
+                                </td>
+                                <td>Xét nghiệm DNA Pháp y</td>
+                                <td>Ngày 15 tháng 11, 2023</td>
+                                <td><span class="status completed">Đã hoàn thành</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                                        <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#BL2023-083</td>
+                                <td>
+                                    <div class="customer-info">
+                                        <img src="img/user5.jpg" alt="Khách hàng" class="small-avatar">
+                                        <span>Jennifer Martinez</span>
+                                    </div>
+                                </td>
+                                <td>Xét nghiệm DNA Tổ tiên</td>
+                                <td>Ngày 14 tháng 11, 2023</td>
+                                <td><span class="status awaiting">Đang chờ xem xét</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                                        <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <div class="admin-row">
+                <section class="recent-users">
+                    <div class="section-header">
+                        <h2>Người dùng gần đây</h2>
+                        <a href="admin-users.html" class="view-all">Xem tất cả người dùng</a>
+                    </div>
+                    
+                    <div class="user-cards">
+                        <div class="user-card">
+                            <img src="img/user6.jpg" alt="Người dùng" class="user-avatar">
+                            <div class="user-details">
+                                <h4>Robert Taylor</h4>
+                                <p>Đăng ký: Ngày 18 tháng 11, 2023</p>
+                                <p>Xét nghiệm: 1 đang hoạt động</p>
+                            </div>
+                            <div class="user-actions">
+                                <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+                        <div class="user-card">
+                            <img src="img/user7.jpg" alt="Người dùng" class="user-avatar">
+                            <div class="user-details">
+                                <h4>Amanda Lopez</h4>
+                                <p>Đăng ký: Ngày 17 tháng 11, 2023</p>
+                                <p>Xét nghiệm: 2 đang hoạt động</p>
+                            </div>
+                            <div class="user-actions">
+                                <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+                        <div class="user-card">
+                            <img src="img/user8.jpg" alt="Người dùng" class="user-avatar">
+                            <div class="user-details">
+                                <h4>David Thompson</h4>
+                                <p>Đăng ký: Ngày 16 tháng 11, 2023</p>
+                                <p>Xét nghiệm: 1 đang hoạt động</p>
+                            </div>
+                            <div class="user-actions">
+                                <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+                        <div class="user-card">
+                            <img src="img/user9.jpg" alt="Người dùng" class="user-avatar">
+                            <div class="user-details">
+                                <h4>Laura Miller</h4>
+                                <p>Đăng ký: Ngày 15 tháng 11, 2023</p>
+                                <p>Xét nghiệm: Không có</p>
+                            </div>
+                            <div class="user-actions">
+                                <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="system-notifications">
+                    <div class="section-header">
+                        <h2>Thông báo hệ thống</h2>
+                        <a href="admin-notifications.html" class="view-all">Xem tất cả</a>
+                    </div>
+                    
+                    <div class="notification-list">
+                        <div class="notification-item urgent">
+                            <div class="notification-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="notification-content">
+                                <h4>Cảnh báo nhiệt độ lưu trữ mẫu</h4>
+                                <p>Nhiệt độ tủ lưu trữ B3 đã vượt ngưỡng (8°C)</p>
+                                <span class="notification-time">10 phút trước</span>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn"><i class="fas fa-check"></i></button>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div class="notification-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="notification-content">
+                                <h4>Đã hoàn tất sao lưu cơ sở dữ liệu</h4>
+                                <p>Sao lưu hàng ngày đã hoàn tất thành công</p>
+                                <span class="notification-time">1 giờ trước</span>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn"><i class="fas fa-check"></i></button>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div class="notification-icon">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="notification-content">
+                                <h4>Đã tạo tài khoản nhân viên phòng thí nghiệm mới</h4>
+                                <p>Tiến sĩ Rebecca Johnson đã được thêm làm Kỹ thuật viên phòng thí nghiệm</p>
+                                <span class="notification-time">2 giờ trước</span>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn"><i class="fas fa-check"></i></button>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div class="notification-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="notification-content">
+                                <h4>Cảnh báo tồn kho thấp</h4>
+                                <p>Bộ kit lấy mẫu DNA tồn kho dưới ngưỡng (còn 25 bộ)</p>
+                                <span class="notification-time">5 giờ trước</span>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn"><i class="fas fa-check"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <section class="lab-capacity">
+                <div class="section-header">
+                    <h2>Năng lực phòng thí nghiệm & Tình trạng thiết bị</h2>
+                </div>
+                
+                <div class="capacity-overview">
+                    <div class="capacity-item">
+                        <div class="capacity-header">
+                            <h3>Xử lý mẫu</h3>
+                            <span class="capacity-percentage">78%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 78%;"></div>
+                        </div>
+                        <div class="capacity-details">
+                            <span>156 / 200 năng lực hàng ngày</span>
+                        </div>
+                    </div>
+                    <div class="capacity-item">
+                        <div class="capacity-header">
+                            <h3>Thiết bị giải trình tự</h3>
+                            <span class="capacity-percentage">92%</span>
+                        </div>
+                        <div class="progress-bar warning">
+                            <div class="progress" style="width: 92%;"></div>
+                        </div>
+                        <div class="capacity-details">
+                            <span>11 / 12 máy đang hoạt động</span>
+                        </div>
+                    </div>
+                    <div class="capacity-item">
+                        <div class="capacity-header">
+                            <h3>Dung lượng lưu trữ</h3>
+                            <span class="capacity-percentage">45%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 45%;"></div>
+                        </div>
+                        <div class="capacity-details">
+                            <span>9.000 / 20.000 mẫu</span>
+                        </div>
+                    </div>
+                    <div class="capacity-item">
+                        <div class="capacity-header">
+                            <h3>Sử dụng nhân sự</h3>
+                            <span class="capacity-percentage">85%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 85%;"></div>
+                        </div>
+                        <div class="capacity-details">
+                            <span>17 / 20 kỹ thuật viên phòng thí nghiệm đang làm việc</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <footer class="admin-footer">
+        <div class="container">
+            <p>&copy; 2023 Dịch vụ xét nghiệm DNA Bloodline. Bảo lưu mọi quyền.</p>
+            <ul class="footer-links">
+                <li><a href="admin-help.html">Trợ giúp quản trị</a></li>
+                <li><a href="admin-documentation.html">Tài liệu</a></li>
+                <li><a href="contact-support.html">Hỗ trợ</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
