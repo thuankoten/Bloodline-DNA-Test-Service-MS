@@ -29,18 +29,66 @@ function initAuthTabs() {
 function updateFormForTab(tabType) {
   const loginForm = document.getElementById("loginForm");
   if (loginForm) {
+
+    loginForm.setAttribute("data-selected-role", tabType);
+    
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    
     switch (tabType) {
       case "admin":
-        loginForm.setAttribute("data-redirect-target", "admin-dashboard.html");
+        emailInput.placeholder = "Nhập email của Admin";
+        passwordInput.placeholder = "Nhập mật khẩu admin";
+        showRoleHint("Admin: admin@bloodline.com / admin123");
         break;
       case "staff":
-        loginForm.setAttribute("data-redirect-target", "staff-dashboard.html");
+        emailInput.placeholder = "Nhập email của Staff";
+        passwordInput.placeholder = "Nhập mật khẩu staff";
+        showRoleHint("Staff: staff@bloodline.com / staff123");
+        break;
+      case "manager":
+        emailInput.placeholder = "Nhập email của Manager";
+        passwordInput.placeholder = "Nhập mật khẩu manager";
+        showRoleHint("Manager: manager@bloodline.com / manager123");
         break;
       default:
-        loginForm.setAttribute("data-redirect-target", "dashboard.html");
+        emailInput.placeholder = "Nhập email của bạn";
+        passwordInput.placeholder = "Nhập mật khẩu của bạn";
+        hideRoleHint();
         break;
     }
   }
+}
+
+function showRoleHint(message) {
+
+  const existingHint = document.querySelector(".role-hint");
+  if (existingHint) existingHint.remove();
+  
+  const hintElement = document.createElement("div");
+  hintElement.className = "role-hint";
+  hintElement.style.cssText = `
+    background: #e3f2fd;
+    border: 1px solid #2196f3;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin: 10px 0;
+    font-size: 14px;
+    color: #1976d2;
+    text-align: center;
+  `;
+  hintElement.innerHTML = `<i class="fas fa-info-circle"></i> ${message}`;
+  
+  const formContainer = document.querySelector(".auth-form-container");
+  if (formContainer) {
+    const form = formContainer.querySelector("form");
+    formContainer.insertBefore(hintElement, form);
+  }
+}
+
+function hideRoleHint() {
+  const existingHint = document.querySelector(".role-hint");
+  if (existingHint) existingHint.remove();
 }
 
 function initPasswordToggle() {
@@ -121,6 +169,7 @@ function initLoginForm() {
 
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
+      const selectedRole = loginForm.getAttribute("data-selected-role") || "customer";
 
       if (!isValidEmail(email)) {
         console.warn("Email không hợp lệ:", email);
@@ -139,32 +188,36 @@ function initLoginForm() {
         '<i class="fas fa-spinner fa-spin"></i> Đang đăng nhập...';
       submitBtn.disabled = true;
 
-      console.log("Đang gửi request đăng nhập với:", { email, password });
+      console.log("Đang gửi request đăng nhập với:", { email, selectedRole });
 
       fetch("http://localhost:8080/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, selectedRole }),
       })
         .then((res) => {
           if (!res.ok) {
             return res
-              .json()
-              .then((errorData) => {
-                throw new Error(
-                  errorData.message ||
-                    "Đăng nhập thất bại với status " + res.status
-                );
-              })
-              .catch(() => {
-                throw new Error("Đăng nhập thất bại với status " + res.status);
+              .text()
+              .then((errorText) => {
+                try {
+                  const errorData = JSON.parse(errorText);
+                  throw new Error(
+                    errorData.message ||
+                      "Đăng nhập thất bại với status " + res.status
+                  );
+                } catch (parseError) {
+                  throw new Error("Đăng nhập thất bại với status " + res.status);
+                }
               });
           }
-          return res.json();
+          return res.text();
         })
-        .then((data) => {
+        .then((responseText) => {
+          const data = JSON.parse(responseText);
+          
           if (data.success) {
             if (
               data.user &&
@@ -172,16 +225,19 @@ function initLoginForm() {
               data.user.username.trim() !== ""
             ) {
               sessionStorage.setItem("loggedInUsername", data.user.username);
+              sessionStorage.setItem("userRole", data.user.role);
+              sessionStorage.setItem("userEmail", data.user.email);
+              sessionStorage.setItem("userFullName", data.user.fullName);
               console.log(
-                "Username đã được lưu vào sessionStorage:",
-                data.user.username
+                "Thông tin user đã được lưu vào sessionStorage:",
+                data.user
               );
             }
 
             showAuthMessage("Đăng nhập thành công!", "success");
             setTimeout(() => {
-              const targetPage =
-                loginForm.dataset.redirectTarget || "dashboard.html";
+              const targetPage = data.redirectPage || "dashboard.html";
+              console.log("Chuyển hướng đến:", targetPage);
               window.location.href = targetPage;
             }, 1500);
           } else {
@@ -191,7 +247,7 @@ function initLoginForm() {
           }
         })
         .catch((err) => {
-          console.error("❌ Lỗi khi gọi API đăng nhập:", err);
+          console.error("Lỗi khi gọi API đăng nhập:", err);
           showAuthMessage(
             "Đã xảy ra lỗi khi đăng nhập. Vui lòng thử lại sau.",
             "error"
@@ -270,8 +326,9 @@ function initRegisterForm() {
           password,
         }),
       })
-        .then((res) => res.json())
-        .then((data) => {
+        .then((res) => res.text())
+        .then((responseText) => {
+          const data = JSON.parse(responseText);
           if (data.success) {
             showAuthMessage(
               "Đăng ký thành công! Bạn sẽ được chuyển hướng đến trang đăng nhập.",
