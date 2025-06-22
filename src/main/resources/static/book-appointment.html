@@ -60,6 +60,31 @@
               </div>
             </div>
 
+            <div class="form-section" id="collectionSection" style="display: none;">
+              <h3>Phương thức lấy mẫu</h3>
+              <div class="form-group">
+                <label for="collectionMethod">Chọn phương thức lấy mẫu</label>
+                <select id="collectionMethod" name="collectionMethod" required>
+                  <option value="">-- Chọn phương thức --</option>
+                  <option value="self">Tự thu mẫu tại nhà</option>
+                  <option value="facility">Yêu cầu cơ sở thu mẫu</option>
+                </select>
+              </div>
+
+              <div id="facilityOptions" class="form-group" style="display: none;">
+                <label for="facilityType">Cách thức cơ sở thu mẫu</label>
+                <select id="facilityType" name="facilityType">
+                  <option value="">-- Chọn hình thức --</option>
+                  <option value="home">Nhân viên đến nhà</option>
+                  <option value="at-location">Đến cơ sở xét nghiệm</option>
+                </select>
+              </div>
+                <div id="addressGroup" class="form-group" style="display: none;">
+                <label for="homeAddress">Địa chỉ </label>
+                <input type="text" id="homeAddress" name="homeAddress" placeholder="Nhập địa chỉ nhà của bạn" />
+              </div>
+            </div>
+
             <div class="form-section">
               <h3>Chi tiết lịch hẹn</h3>
               <div class="form-row">
@@ -108,44 +133,7 @@
       </div>
     </main>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Lấy loại dịch vụ từ URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const serviceType = urlParams.get("service");
+    <script src="js/book-appointment.js"></script>
 
-        // Thêm thông tin dịch vụ đã chọn vào biểu mẫu
-        if (serviceType) {
-          const serviceInfo = {
-            paternity: "Xét nghiệm DNA huyết thống",
-            relationship: "Xét nghiệm mối quan hệ gia đình",
-            forensic: "Xét nghiệm DNA pháp y",
-          };
-
-          // Tạo hiển thị lựa chọn dịch vụ
-          const serviceDisplay = document.createElement("div");
-          serviceDisplay.className = "selected-service";
-          serviceDisplay.innerHTML = `
-                    <h3>Dịch vụ đã chọn</h3>
-                    <p>${
-                      serviceInfo[serviceType] || "Dịch vụ không xác định"
-                    }</p>
-                `;
-
-          // Chèn vào đầu biểu mẫu đặt lịch
-          const form = document.getElementById("appointmentForm");
-          form.insertBefore(serviceDisplay, form.firstChild);
-        }
-
-        // Xử lý gửi biểu mẫu
-        document
-          .getElementById("appointmentForm")
-          .addEventListener("submit", function (e) {
-            e.preventDefault(); // Ngăn chặn hành vi gửi biểu mẫu mặc định
-            alert("Đặt lịch hẹn thành công!"); // Hiển thị thông báo xác nhận
-            window.location.href = "index.html"; // Chuyển hướng về trang chủ
-          });
-      });
-    </script>
   </body>
 </html>
