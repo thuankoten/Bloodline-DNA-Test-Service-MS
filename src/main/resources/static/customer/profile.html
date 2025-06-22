@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hồ sơ của tôi - Dịch vụ xét nghiệm DNA Bloodline</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/profile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="dashboard-page">
+    <header class="dashboard-header">
+      <div class="container">
+        <div class="logo">
+          <a href="index.html">
+            <i class="fas fa-dna"></i> <span>Bloodline</span>
+          </a>
+        </div>
+
+        <div class="header-right">
+          <div class="search-bar">
+            <input type="text" placeholder="Tìm kiếm..." />
+            <button><i class="fas fa-search"></i></button>
+          </div>
+
+          <div class="notification">
+            <i class="fas fa-bell"></i>
+            <span class="badge">3</span>
+          </div>
+
+          <div class="user-menu">
+            <img
+              src="img/user-avatar.jpg"
+              alt="Ảnh đại diện người dùng"
+              class="avatar"
+            />
+            <div class="user-info">
+              <span class="user-name"></span>
+              <span class="user-role">Khách hàng</span>
+            </div>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="dashboard-wrapper">
+      <aside class="sidebar">
+        <nav class="main-nav">
+          <ul>
+            <li>
+              <a href="dashboard.html">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Bảng điều khiển</span>
+              </a>
+            </li>
+            <li>
+              <a href="my-tests.html">
+                <i class="fas fa-vial"></i>
+                <span>Các xét nghiệm của tôi</span>
+              </a>
+            </li>
+            <li>
+              <a href="order-test.html">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Đặt xét nghiệm mới</span>
+              </a>
+            </li>
+            <li>
+              <a href="results.html">
+                <i class="fas fa-file-medical-alt"></i>
+                <span>Kết quả xét nghiệm</span>
+              </a>
+            </li>
+            <li>
+              <a href="family-tree.html">
+                <i class="fas fa-sitemap"></i>
+                <span>Cây gia đình</span>
+              </a>
+            </li>
+            <li>
+              <a href="messages.html">
+                <i class="fas fa-comments"></i>
+                <span>Tin nhắn</span>
+                <span class="badge">5</span>
+              </a>
+            </li>
+            <li>
+              <a href="appointments.html">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Lịch hẹn</span>
+              </a>
+            </li>
+            <li class="active">
+              <a href="profile.html">
+                <i class="fas fa-user-circle"></i>
+                <span>Hồ sơ của tôi</span>
+              </a>
+            </li>
+            <li>
+              <a href="settings.html">
+                <i class="fas fa-cog"></i>
+                <span>Cài đặt</span>
+              </a>
+            </li>
+            <li class="logout">
+              <a href="../login/login.html" id="logout-link">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Đăng xuất</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="dashboard-main">
+        <div class="page-header">
+          <h1>Hồ sơ của tôi</h1>
+          <p>Cập nhật thông tin cá nhân và chi tiết tài khoản của bạn.</p>
+        </div>
+
+        <section class="profile-section">
+          <form class="profile-form">
+            <div class="form-group">
+              <label for="full-name">Họ và tên</label>
+              <input
+                type="text"
+                id="full-name"
+                name="full-name"
+                placeholder="Họ và tên"
+                readonly
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Địa chỉ Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="example@email.com"
+                readonly
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Số điện thoại</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="0123 456 789"
+                readonly
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="new-password">Mật khẩu mới</label>
+              <input
+                type="password"
+                id="new-password"
+                name="new-password"
+                placeholder="Nhập mật khẩu mới"
+              />
+              <div class="strength-meter"><span></span></div>
+              <div class="strength-text"><span></span></div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn">Cập nhật mật khẩu</button>
+              <button type="reset" class="btn btn-secondary">Đặt lại</button>
+            </div>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/profile.js"></script>
+  </body>
+</html>

@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     sessionStorage.removeItem("userRole");
     sessionStorage.removeItem("userEmail");
     sessionStorage.removeItem("userFullName");
-    window.location.href = "index.html";
+    window.location.href = "../login/login.html";
   });
 
   // Kiểm tra độ mạnh mật khẩu mới
