@@ -37,7 +37,7 @@ function initAdminUI() {
                 <ul>
                     <li><a href="admin-profile.html"><i class="fas fa-user-circle"></i> Hồ sơ của tôi</a></li>
                     <li><a href="admin-settings.html"><i class="fas fa-cog"></i> Cài đặt hệ thống</a></li>
-                    <li><a href="login.html"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+                    <li><a href="../login/login.html"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
                 </ul>
             `;
 

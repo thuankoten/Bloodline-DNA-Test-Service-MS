@@ -776,10 +776,19 @@ process-steps {
 }
 
 .blog-actions .btn {
-  padding: 15px 30px;
-  font-size: 1rem;
-  border-radius: 25px;
-  transition: all 0.3s ease;
+    padding: 10px 24px;
+    font-size: 1rem;
+    border-radius: 25px;
+    background-color: #3b6fb6;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    height: 73px;
+    width: auto;
+    line-height: 3.4;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
 }
 
 .blog-actions .btn:hover {

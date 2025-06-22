@@ -18,8 +18,8 @@
       <div class="container">
         <h1>Xét nghiệm DNA huyết thống</h1>
         <nav class="breadcrumb">
-          <a href="index.html">Trang chủ</a> / <a href="#services">Dịch vụ</a> /
-          <span>Xét nghiệm DNA huyết thống</span>
+          <a href="index.html">Trang chủ</a> / <a href="../#services">Dịch vụ</a> /
+          <span id="breadcrumb-current">Xét nghiệm DNA huyết thống</span>
         </nav>
       </div>
     </div>
@@ -51,6 +51,9 @@
                   </button>
                   <button class="tab-btn" data-tab="documents">
                     Tài liệu yêu cầu
+                  </button>
+                  <button class="tab-btn" data-tab="pricing">
+                    Bảng giá chi tiết
                   </button>
                 </div>
 
@@ -104,23 +107,7 @@
                   </div>
 
                   <div class="tab-pane" id="faq">
-                    <div class="accordion">
-                      <div class="accordion-item">
-                        <div class="accordion-header">
-                          <h4>Độ chính xác của xét nghiệm DNA là bao nhiêu?</h4>
-                          <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="accordion-content">
-                          <p>
-                            Xét nghiệm DNA của chúng tôi cung cấp độ chính xác
-                            99.99% cho trường hợp khẳng định và 100% cho trường
-                            hợp loại trừ. Chúng tôi sử dụng công nghệ mới nhất
-                            và tuân thủ các biện pháp kiểm soát chất lượng
-                            nghiêm ngặt.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+                    <div class="accordion"></div>
                   </div>
 
                   <div class="tab-pane" id="documents">
@@ -134,6 +121,9 @@
                       </div>
                     </div>
                   </div>
+                  <div class="tab-pane" id="pricing">
+                    <div class="pricing-details"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -144,7 +134,7 @@
               <h3>Giá dịch vụ</h3>
               <div class="price">
                 <span class="amount">4.990.000 VNĐ</span>
-                <span class="period">mỗi xét nghiệm</span>
+                <span class="period">/xét nghiệm</span>
               </div>
               <ul class="pricing-features">
                 <li><i class="fas fa-check"></i> Hồ sơ pháp lý</li>
@@ -159,7 +149,7 @@
                 class="btn btn-primary btn-block"
                 >Đặt lịch hẹn</a
               >
-              <a href="#contact" class="btn btn-outline btn-block"
+              <a href="../#contact" class="btn btn-outline btn-block"
                 >Liên hệ với chúng tôi</a
               >
             </div>
@@ -170,14 +160,14 @@
                 <i class="fas fa-phone"></i>
                 <div>
                   <h4>Gọi cho chúng tôi</h4>
-                  <p>+1 (800) DNA-TEST</p>
+                  <p>028-1234-5678 DNA-TEST</p>
                 </div>
               </div>
               <div class="contact-item">
                 <i class="fas fa-envelope"></i>
                 <div>
                   <h4>Gửi email cho chúng tôi</h4>
-                  <p>info@bloodline.com</p>
+                  <p>info@bloodlinedna.vn</p>
                 </div>
               </div>
             </div>
@@ -186,7 +176,52 @@
       </div>
     </section>
 
-    <footer></footer>
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <h2><i class="fas fa-dna"></i> Bloodline</h2>
+            <p>Dịch vụ xét nghiệm DNA</p>
+          </div>
+          <div class="footer-links">
+            <h3>Liên kết nhanh</h3>
+            <ul>
+              <li><a href="index.html">Trang chủ</a></li>
+              <li><a href="#services">Dịch vụ</a></li>
+              <li><a href="#about">Về chúng tôi</a></li>
+              <li><a href="#blog">Blog</a></li>
+              <li><a href="#contact">Liên hệ</a></li>
+              <li><a href="privacy.html">Chính sách bảo mật</a></li>
+            </ul>
+          </div>
+          <div class="footer-newsletter">
+            <h3>Luôn cập nhật</h3>
+            <p>
+              Đăng ký nhận bản tin của chúng tôi để nhận các cập nhật và ưu đãi mới nhất
+            </p>
+            <form class="newsletter-form">
+              <input
+                type="email"
+                placeholder="Địa chỉ email của bạn"
+                required
+              />
+              <button type="submit"><i class="fas fa-paper-plane"></i></button>
+            </form>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2023 Dịch vụ xét nghiệm DNA Bloodline. Bảo lưu mọi quyền.
+          </p>
+        </div>
+      </div>
+    </footer>
 
     <script>
       // Get current service type from URL
@@ -199,5 +234,8 @@
         bookingButton.href = `book-appointment.html?service=${serviceType}`;
       }
     </script>
+
+    <script src="js/service-detail.js"></script>
+    
   </body>
 </html>

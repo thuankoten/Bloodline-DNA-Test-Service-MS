@@ -580,6 +580,120 @@
     color: var(--primary-color);
 }
 
+/* System Notifications */
+.system-notifications-floating {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.notif-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 32px 24px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.notif-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.notif-header h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.notif-view-all {
+  color: #1976d2;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.notif-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notif-item {
+  display: flex;
+  align-items: center;
+  background: #f6f8fa;
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  border-left: 4px solid transparent;
+  transition: background 0.2s;
+}
+
+.notif-item:last-child {
+  margin-bottom: 0;
+}
+
+.notif-icon {
+  font-size: 1.3rem;
+  margin-right: 14px;
+  color: #1976d2;
+  flex-shrink: 0;
+}
+
+.notif-content a {
+  color: #222;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.notif-content b {
+  font-weight: 600;
+}
+
+.notif-time {
+  color: #888;
+  font-size: 0.95rem;
+  margin-left: 10px;
+  white-space: nowrap;
+}
+
+.notif-item.notif-alert {
+  background: #fff4f4;
+  border-left: 4px solid #e53935;
+}
+
+.notif-item.notif-alert .notif-icon {
+  color: #e53935;
+}
+
+/* Filter Styles */
+.notif-filter {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.filter-btn {
+  background: #f6f8fa;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 16px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #1976d2;
+  transition: background 0.2s, color 0.2s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: #1976d2;
+  color: #fff;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 992px) {
     .sidebar {
@@ -654,4 +768,4 @@
     .rec-icon {
         margin: 0 auto;
     }
-} 
+}

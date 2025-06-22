@@ -37,7 +37,7 @@ function initDashboardUI() {
                 <ul>
                     <li><a href="profile.html"><i class="fas fa-user-circle"></i> Hồ sơ của tôi</a></li>
                     <li><a href="settings.html"><i class="fas fa-cog"></i> Cài đặt</a></li>
-                    <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+                    <li><a href="../login/login.html"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
                 </ul>
             `;
 

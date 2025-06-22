@@ -29,12 +29,11 @@ function initAuthTabs() {
 function updateFormForTab(tabType) {
   const loginForm = document.getElementById("loginForm");
   if (loginForm) {
-
     loginForm.setAttribute("data-selected-role", tabType);
-    
+
     const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
-    
+
     switch (tabType) {
       case "admin":
         emailInput.placeholder = "Nhập email của Admin";
@@ -61,10 +60,9 @@ function updateFormForTab(tabType) {
 }
 
 function showRoleHint(message) {
-
   const existingHint = document.querySelector(".role-hint");
   if (existingHint) existingHint.remove();
-  
+
   const hintElement = document.createElement("div");
   hintElement.className = "role-hint";
   hintElement.style.cssText = `
@@ -78,7 +76,7 @@ function showRoleHint(message) {
     text-align: center;
   `;
   hintElement.innerHTML = `<i class="fas fa-info-circle"></i> ${message}`;
-  
+
   const formContainer = document.querySelector(".auth-form-container");
   if (formContainer) {
     const form = formContainer.querySelector("form");
@@ -169,16 +167,15 @@ function initLoginForm() {
 
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
-      const selectedRole = loginForm.getAttribute("data-selected-role") || "customer";
+      const selectedRole =
+        loginForm.getAttribute("data-selected-role") || "customer";
 
       if (!isValidEmail(email)) {
-        console.warn("Email không hợp lệ:", email);
         showAuthMessage("Vui lòng nhập địa chỉ email hợp lệ.", "error");
         return;
       }
 
       if (password.length < 6) {
-        console.warn("Mật khẩu quá ngắn:", password);
         showAuthMessage("Mật khẩu phải có ít nhất 6 ký tự.", "error");
         return;
       }
@@ -187,8 +184,6 @@ function initLoginForm() {
       submitBtn.innerHTML =
         '<i class="fas fa-spinner fa-spin"></i> Đang đăng nhập...';
       submitBtn.disabled = true;
-
-      console.log("Đang gửi request đăng nhập với:", { email, selectedRole });
 
       fetch("http://localhost:8080/api/login", {
         method: "POST",
@@ -199,25 +194,23 @@ function initLoginForm() {
       })
         .then((res) => {
           if (!res.ok) {
-            return res
-              .text()
-              .then((errorText) => {
-                try {
-                  const errorData = JSON.parse(errorText);
-                  throw new Error(
-                    errorData.message ||
-                      "Đăng nhập thất bại với status " + res.status
-                  );
-                } catch (parseError) {
-                  throw new Error("Đăng nhập thất bại với status " + res.status);
-                }
-              });
+            return res.text().then((errorText) => {
+              try {
+                const errorData = JSON.parse(errorText);
+                throw new Error(
+                  errorData.message ||
+                    "Đăng nhập thất bại với status " + res.status
+                );
+              } catch (parseError) {
+                throw new Error("Đăng nhập thất bại với status " + res.status);
+              }
+            });
           }
           return res.text();
         })
         .then((responseText) => {
           const data = JSON.parse(responseText);
-          
+
           if (data.success) {
             if (
               data.user &&
@@ -235,10 +228,25 @@ function initLoginForm() {
             }
 
             showAuthMessage("Đăng nhập thành công!", "success");
+
             setTimeout(() => {
-              const targetPage = data.redirectPage || "dashboard.html";
-              console.log("Chuyển hướng đến:", targetPage);
-              window.location.href = targetPage;
+              let redirectPage = "/customer/dashboard.html";
+              switch (data.user.role) {
+                case "admin":
+                  redirectPage = "/admin/admin-dashboard.html";
+                  break;
+                case "staff":
+                  redirectPage = "/staff/staff-dashboard.html";
+                  break;
+                case "manager":
+                  redirectPage = "/manager/manager-dashboard.html";
+                  break;
+                default:
+                  redirectPage = "/customer/dashboard.html";
+              }
+
+              console.log("Chuyển hướng đến:", redirectPage);
+              window.location.href = redirectPage;
             }, 1500);
           } else {
             showAuthMessage(data.message || "Đăng nhập thất bại.", "error");
