@@ -123,42 +123,52 @@
           </p>
         </div>
 
-        <section class="system-notifications">
-          <div class="section-header">
-            <h2>Thông báo hệ thống</h2>
-            <a href="notifications.html" class="view-all">Xem tất cả</a>
-          </div>
-          <ul class="notification-list">
-            <li>
-              <span class="notif-icon"><i class="fas fa-user-plus"></i></span>
-              <span class="notif-content">
-                <a href="customer-profile.html?id=nguyenvana">Khách hàng mới <b>Nguyễn Văn A</b> vừa đăng ký tài khoản.</a>
-              </span>
-              <span class="notif-time">2 phút trước</span>
-            </li>
-            <li>
-              <span class="notif-icon"><i class="fas fa-vial"></i></span>
-              <span class="notif-content">
-                <a href="customer-tests.html?order=BL2023-004">Đơn xét nghiệm <b>#BL2023-004</b> vừa được tạo.</a>
-              </span>
-              <span class="notif-time">10 phút trước</span>
-            </li>
-            <li>
-              <span class="notif-icon"><i class="fas fa-file-medical-alt"></i></span>
-              <span class="notif-content">
-                <a href="results-manager.html?result=BL2023-002">Kết quả xét nghiệm <b>#BL2023-002</b> đã sẵn sàng để duyệt.</a>
-              </span>
-              <span class="notif-time">30 phút trước</span>
-            </li>
-            <li>
-              <span class="notif-icon"><i class="fas fa-exclamation-triangle"></i></span>
-              <span class="notif-content">
-                <a href="customer-tests.html?status=error">Cảnh báo: Có 1 mẫu xét nghiệm bị lỗi cần xử lý.</a>
-              </span>
-              <span class="notif-time">1 giờ trước</span>
-            </li>
-          </ul>
-        </section>
+        <section class="system-notifications-floating">
+    <div class="notif-card">
+      <div class="notif-header">
+        <h2>Thông báo hệ thống</h2>
+        <a href="notifications.html" class="notif-view-all">Xem tất cả</a>
+      </div>
+
+      <ul class="notif-list">
+        <li class="notif-item type-user">
+          <span class="notif-icon"><i class="fas fa-user-plus"></i></span>
+          <span class="notif-content">
+            <a href="customer-profile.html?id=nguyenvana">Khách hàng mới <b>Nguyễn Văn A</b> vừa đăng ký tài khoản.</a>
+          </span>
+          <span class="notif-time">2 phút trước</span>
+        </li>
+        <li class="notif-item type-order">
+          <span class="notif-icon"><i class="fas fa-vial"></i></span>
+          <span class="notif-content">
+            <a href="customer-tests.html?order=BL2023-004">Đơn xét nghiệm <b>#BL2023-004</b> vừa được tạo.</a>
+          </span>
+          <span class="notif-time">10 phút trước</span>
+        </li>
+        <li class="notif-item type-result">
+          <span class="notif-icon"><i class="fas fa-file-medical-alt"></i></span>
+          <span class="notif-content">
+            <a href="results-manager.html?result=BL2023-002">Kết quả xét nghiệm <b>#BL2023-002</b> đã sẵn sàng để duyệt.</a>
+          </span>
+          <span class="notif-time">30 phút trước</span>
+        </li>
+        <li class="notif-item notif-alert type-result">
+          <span class="notif-icon"><i class="fas fa-exclamation-triangle"></i></span>
+          <span class="notif-content">
+            <a href="customer-tests.html?status=error">Cảnh báo: Có 1 mẫu xét nghiệm bị lỗi cần xử lý.</a>
+          </span>
+          <span class="notif-time">1 giờ trước</span>
+        </li>
+        <li class="notif-item type-date">
+          <span class="notif-icon"><i class="fas fa-calendar-alt"></i></span>
+          <span class="notif-content">
+            <a href="appointments-manager.html?result=2025-06-01">Đã thêm một lịch hẹn mới vào ngày <b>2025-06-01</b>.</a>
+          </span>
+          <span class="notif-time">1 giờ trước</span>
+        </li>
+      </ul>
+    </div>
+  </section>
         </div>
       </main>
     </div>
