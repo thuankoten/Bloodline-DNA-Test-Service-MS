@@ -130,6 +130,14 @@
         <a href="notifications.html" class="notif-view-all">Xem tất cả</a>
       </div>
 
+      <div class="notif-filter">
+        <button class="filter-btn active" data-type="all">Tất cả</button>
+        <button class="filter-btn" data-type="type-user">Khách hàng</button>
+        <button class="filter-btn" data-type="type-order">Đơn xét nghiệm</button>
+        <button class="filter-btn" data-type="type-result">Kết quả xét nghiệm</button>
+        <button class="filter-btn" data-type="type-date">Lịch hẹn</button>
+      </div>
+
       <ul class="notif-list">
         <li class="notif-item type-user">
           <span class="notif-icon"><i class="fas fa-user-plus"></i></span>
@@ -226,6 +234,24 @@
             window.location.href = "index.html"; // Hoặc 'login.html' tùy ý
           });
         }
+
+        // Notification filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const notifItems = document.querySelectorAll('.notif-item');
+        filterBtns.forEach(btn => {
+          btn.addEventListener('click', function() {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            const type = this.getAttribute('data-type');
+            notifItems.forEach(item => {
+              if (type === 'all' || item.classList.contains(type)) {
+                item.style.display = '';
+              } else {
+                item.style.display = 'none';
+              }
+            });
+          });
+        });
       });
     </script>
   </body>
