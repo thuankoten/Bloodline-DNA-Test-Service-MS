@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bảng điều khiển - Dịch vụ xét nghiệm DNA Bloodline</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/order-test.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="dashboard-page">
+    <header class="dashboard-header">
+      <div class="container">
+        <div class="logo">
+          <a href="../index.html">
+            <i class="fas fa-dna"></i> <span>Bloodline</span>
+          </a>
+        </div>
+
+        <div class="header-right">
+          <div class="search-bar">
+            <input type="text" placeholder="Tìm kiếm..." />
+            <button><i class="fas fa-search"></i></button>
+          </div>
+
+          <div class="notification">
+            <i class="fas fa-bell"></i>
+            <span class="badge">3</span>
+          </div>
+
+          <div class="user-menu">
+            <img
+              src="img/user-avatar.jpg"
+              alt="Ảnh đại diện người dùng"
+              class="avatar"
+            />
+            <div class="user-info">
+              <span class="user-name"></span>
+              <span class="user-role">Khách hàng</span>
+            </div>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="dashboard-wrapper">
+      <aside class="sidebar">
+        <nav class="main-nav">
+          <ul>
+            <li>
+              <a href="dashboard.html"
+                ><i class="fas fa-tachometer-alt"></i
+                ><span>Bảng điều khiển</span></a
+              >
+            </li>
+            <li>
+              <a href="my-tests.html"
+                ><i class="fas fa-vial"></i
+                ><span>Các xét nghiệm của tôi</span></a
+              >
+            </li>
+            <li class="active">
+              <a href="order-test.html"
+                ><i class="fas fa-shopping-cart"></i
+                ><span>Đặt xét nghiệm mới</span></a
+              >
+            </li>
+            <li>
+              <a href="results.html"
+                ><i class="fas fa-file-medical-alt"></i
+                ><span>Kết quả xét nghiệm</span></a
+              >
+            </li>
+            <li>
+              <a href="family-tree.html"
+                ><i class="fas fa-sitemap"></i><span>Cây gia đình</span></a
+              >
+            </li>
+            <li>
+              <a href="messages.html"
+                ><i class="fas fa-comments"></i><span>Tin nhắn</span
+                ><span class="badge">5</span></a
+              >
+            </li>
+            <li>
+              <a href="appointments.html"
+                ><i class="fas fa-calendar-alt"></i><span>Lịch hẹn</span></a
+              >
+            </li>
+            <li>
+              <a href="profile.html"
+                ><i class="fas fa-user-circle"></i><span>Hồ sơ của tôi</span></a
+              >
+            </li>
+            <li>
+              <a href="settings.html"
+                ><i class="fas fa-cog"></i><span>Cài đặt</span></a
+              >
+            </li>
+            <li class="logout">
+              <a href="../login/login.html" id="logout-link"
+                ><i class="fas fa-sign-out-alt"></i><span>Đăng xuất</span></a
+              >
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="dashboard-main">
+        <section class="order-test-section">
+          <h2>Đăng ký hẹn lịch xét nghiệm</h2>
+          <form id="appointment-form" class="appointment-form">
+            <div class="form-group">
+              <label for="test-type">Loại xét nghiệm</label>
+              <select id="test-type" required>
+                <option value="" disabled selected>
+                  -- Chọn loại xét nghiệm --
+                </option>
+                <option value="dna-huyet-thong">
+                  Xét nghiệm DNA huyết thống
+                </option>
+                <option value="gia-dinh">
+                  Xét nghiệm mối quan hệ gia đình
+                </option>
+                <option value="dna-phap-y">Xét nghiệm DNA pháp y</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Gói dịch vụ</label>
+              <div id="test-price-options" class="price-options">
+                <p style="color: #888">Vui lòng chọn loại xét nghiệm</p>
+              </div>
+            </div>
+
+            <div class="form-group" id="location-group">
+              <label>Hình thức xét nghiệm</label>
+              <div>
+                <label
+                  ><input type="radio" name="location" value="home" required />
+                  Tại nhà</label
+                >
+                <label
+                  ><input type="radio" name="location" value="clinic" /> Tại cơ
+                  sở y tế</label
+                >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="appointment-date">Ngày hẹn</label>
+              <input type="date" id="appointment-date" required />
+            </div>
+
+            <div class="form-group">
+              <label for="appointment-time">Giờ hẹn</label>
+              <select id="appointment-time" required>
+                <option value="">-- Chọn giờ hẹn --</option>
+                <option value="00:00">00:00</option>
+                <option value="01:00">01:00</option>
+                <option value="02:00">02:00</option>
+                <option value="03:00">03:00</option>
+                <option value="04:00">04:00</option>
+                <option value="05:00">05:00</option>
+                <option value="06:00">06:00</option>
+                <option value="07:00">07:00</option>
+                <option value="08:00">08:00</option>
+                <option value="09:00">09:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:00">19:00</option>
+                <option value="20:00">20:00</option>
+                <option value="21:00">21:00</option>
+                <option value="22:00">22:00</option>
+                <option value="23:00">23:00</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn-primary">Đặt hẹn</button>
+          </form>
+        </section>
+
+        <!-- Modal xác nhận địa chỉ -->
+        <div id="address-modal" class="modal hidden">
+          <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Xác nhận địa chỉ nhận bộ kit</h3>
+            <form id="address-form">
+              <div class="form-group">
+                <label for="recipient-name">Họ tên người nhận</label>
+                <input type="text" id="recipient-name" required />
+              </div>
+              <div class="form-group">
+                <label for="recipient-address">Địa chỉ</label>
+                <textarea id="recipient-address" rows="3" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="recipient-phone">Số điện thoại</label>
+                <input type="tel" id="recipient-phone" required />
+              </div>
+              <button type="submit" class="btn-primary">
+                Xác nhận & Nhận kit
+              </button>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <footer class="dashboard-footer">
+      <div class="container">
+        <p>&copy; 2023 Dịch vụ xét nghiệm DNA Bloodline. Bảo lưu mọi quyền.</p>
+        <ul class="footer-links">
+          <li><a href="../privacy.html">Chính sách bảo mật</a></li>
+          <li><a href="../terms.html">Điều khoản dịch vụ</a></li>
+          <li><a href="../contact.html">Liên hệ chúng tôi</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/order-test.js"></script>
+  </body>
+</html>
