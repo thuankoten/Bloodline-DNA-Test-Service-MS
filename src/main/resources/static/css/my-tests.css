@@ -1,0 +1,167 @@
+#used-services-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+#used-services-list li {
+  padding: 20px 24px;
+  border-bottom: 1px solid #f1f1f1;
+  font-size: 15px;
+  color: #2f2f2f;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #f9fbff;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+#used-services-list li:hover {
+  background-color: #eef4ff;
+}
+
+#used-services-list li:last-child {
+  border-bottom: none;
+}
+
+#used-services-list li::before {
+  content: "\f00c";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  color: #2ecc71;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+#used-services-list li > div:first-child {
+  font-weight: 600;
+  padding-left: 28px;
+  font-size: 16px;
+  color: #1a1a1a;
+}
+
+#used-services-list li span {
+  font-weight: 500;
+  color: #4a4a4a;
+}
+
+.sample-type-select {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 14px;
+  min-width: 160px;
+  transition: border-color 0.2s ease;
+}
+
+.sample-type-select:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.test-status {
+  margin-left: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.test-status.waiting {
+  color: red !important;
+}
+
+.test-status.done {
+  color: #27ae60 !important;
+}
+
+@media (max-width: 600px) {
+  #used-services-list li {
+    padding: 16px;
+  }
+
+  .sample-type-select {
+    width: 100%;
+  }
+
+  .test-status {
+    display: block;
+    margin: 8px 0 0;
+  }
+}
+
+#sample-confirm-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+#sample-confirm-modal .modal-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+#sample-confirm-modal .modal-box {
+  position: relative;
+  background: white;
+  padding: 20px 25px;
+  border-radius: 10px;
+  max-width: 400px;
+  text-align: center;
+  z-index: 10000;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.3s ease;
+}
+
+#sample-confirm-modal p {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+#sample-confirm-modal .modal-actions button {
+  margin: 0 10px;
+  padding: 8px 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#modal-confirm {
+  background-color: #28a745;
+  color: white;
+}
+
+#modal-cancel {
+  background-color: #e74c3c;
+  color: white;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
