@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       tbody.innerHTML = "<tr><td colspan='5'>Không có dữ liệu</td></tr>";
     }
-  }
+  } 
 
   document.getElementById('filterBtn').addEventListener('click', function() {
     const fromDate = document.getElementById('fromDate').value;
