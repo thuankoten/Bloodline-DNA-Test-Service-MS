@@ -15,7 +15,7 @@
     <header class="dashboard-header">
       <div class="container">
         <div class="logo">
-          <a href="../index.html">
+          <a href="index.html"> //Thay đổi đường dẫn nếu cần
             <i class="fas fa-dna"></i> <span>Bloodline</span>
           </a>
         </div>
@@ -52,7 +52,7 @@
         <nav class="main-nav">
           <ul>
             <li class="active">
-              <a href="../customer/dashboard.html">
+              <a href="dashboard.html">
                 <i class="fas fa-tachometer-alt"></i>
                 <span>Bảng điều khiển</span>
               </a>
@@ -70,7 +70,7 @@
               </a>
             </li>
             <li>
-              <a href="customer-profile.html">
+            <a href="customer-profile.html">
                 <i class="fa-solid fa-hospital-user"></i>
                 <span>Quản lý hồ sơ khách hàng</span>
               </a>
@@ -94,7 +94,7 @@
               </a>
             </li>
             <li>
-              <a href="family-tree.html">
+            <a href="family-tree.html">
                 <i class="fa-solid fa-receipt"></i>
                 <span>Thống kê và báo cáo</span>
               </a>
@@ -106,7 +106,7 @@
               </a>
             </li>
             <li class="logout">
-              <a href="../login/login.html" id="logout-link">
+              <a href="#" id="logout-link">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Đăng xuất</span>
               </a>
@@ -118,58 +118,66 @@
       <main class="dashboard-main">
         <div class="page-header">
           <h1>Bảng điều khiển</h1>
-          <p>Chào mừng Tổng quản lý đã trở lại!</p>
+          <p>
+            Chào mừng Tổng quản lý đã trở lại!
+          </p>
         </div>
 
-        <section class="system-notifications">
-          <div class="section-header">
-            <h2>Thông báo hệ thống</h2>
-            <a href="notifications.html" class="view-all">Xem tất cả</a>
-          </div>
-          <ul class="notification-list">
-            <li>
-              <span class="notif-icon"><i class="fas fa-user-plus"></i></span>
-              <span class="notif-content">
-                <a href="customer-profile.html?id=nguyenvana"
-                  >Khách hàng mới <b>Nguyễn Văn A</b> vừa đăng ký tài khoản.</a
-                >
-              </span>
-              <span class="notif-time">2 phút trước</span>
-            </li>
-            <li>
-              <span class="notif-icon"><i class="fas fa-vial"></i></span>
-              <span class="notif-content">
-                <a href="customer-tests.html?order=BL2023-004"
-                  >Đơn xét nghiệm <b>#BL2023-004</b> vừa được tạo.</a
-                >
-              </span>
-              <span class="notif-time">10 phút trước</span>
-            </li>
-            <li>
-              <span class="notif-icon"
-                ><i class="fas fa-file-medical-alt"></i
-              ></span>
-              <span class="notif-content">
-                <a href="results-manager.html?result=BL2023-002"
-                  >Kết quả xét nghiệm <b>#BL2023-002</b> đã sẵn sàng để
-                  duyệt.</a
-                >
-              </span>
-              <span class="notif-time">30 phút trước</span>
-            </li>
-            <li>
-              <span class="notif-icon"
-                ><i class="fas fa-exclamation-triangle"></i
-              ></span>
-              <span class="notif-content">
-                <a href="customer-tests.html?status=error"
-                  >Cảnh báo: Có 1 mẫu xét nghiệm bị lỗi cần xử lý.</a
-                >
-              </span>
-              <span class="notif-time">1 giờ trước</span>
-            </li>
-          </ul>
-        </section>
+        <section class="system-notifications-floating">
+    <div class="notif-card">
+      <div class="notif-header">
+        <h2>Thông báo hệ thống</h2>
+        <a href="notifications.html" class="notif-view-all">Xem tất cả</a>
+      </div>
+
+      <div class="notif-filter">
+        <button class="filter-btn active" data-type="all">Tất cả</button>
+        <button class="filter-btn" data-type="type-user">Khách hàng</button>
+        <button class="filter-btn" data-type="type-order">Đơn xét nghiệm</button>
+        <button class="filter-btn" data-type="type-result">Kết quả xét nghiệm</button>
+        <button class="filter-btn" data-type="type-date">Lịch hẹn</button>
+      </div>
+
+      <ul class="notif-list">
+        <li class="notif-item type-user">
+          <span class="notif-icon"><i class="fas fa-user-plus"></i></span>
+          <span class="notif-content">
+            <a href="customer-profile.html?id=nguyenvana">Khách hàng mới <b>Nguyễn Văn A</b> vừa đăng ký tài khoản.</a>
+          </span>
+          <span class="notif-time">2 phút trước</span>
+        </li>
+        <li class="notif-item type-order">
+          <span class="notif-icon"><i class="fas fa-vial"></i></span>
+          <span class="notif-content">
+            <a href="customer-tests.html?order=BL2023-004">Đơn xét nghiệm <b>#BL2023-004</b> vừa được tạo.</a>
+          </span>
+          <span class="notif-time">10 phút trước</span>
+        </li>
+        <li class="notif-item type-result">
+          <span class="notif-icon"><i class="fas fa-file-medical-alt"></i></span>
+          <span class="notif-content">
+            <a href="results-manager.html?result=BL2023-002">Kết quả xét nghiệm <b>#BL2023-002</b> đã sẵn sàng để duyệt.</a>
+          </span>
+          <span class="notif-time">30 phút trước</span>
+        </li>
+        <li class="notif-item notif-alert type-result">
+          <span class="notif-icon"><i class="fas fa-exclamation-triangle"></i></span>
+          <span class="notif-content">
+            <a href="customer-tests.html?status=error">Cảnh báo: Có 1 mẫu xét nghiệm bị lỗi cần xử lý.</a>
+          </span>
+          <span class="notif-time">1 giờ trước</span>
+        </li>
+        <li class="notif-item type-date">
+          <span class="notif-icon"><i class="fas fa-calendar-alt"></i></span>
+          <span class="notif-content">
+            <a href="appointments-manager.html?result=2025-06-01">Đã thêm một lịch hẹn mới vào ngày <b>2025-06-01</b>.</a>
+          </span>
+          <span class="notif-time">1 giờ trước</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+        </div>
       </main>
     </div>
 
@@ -177,15 +185,15 @@
       <div class="container">
         <p>&copy; 2023 Dịch vụ xét nghiệm DNA Bloodline. Bảo lưu mọi quyền.</p>
         <ul class="footer-links">
-          <li><a href="../privacy.html">Chính sách bảo mật</a></li>
-          <li><a href="../terms.html">Điều khoản dịch vụ</a></li>
-          <li><a href="../contact.html">Liên hệ chúng tôi</a></li>
+          <li><a href="privacy.html">Chính sách bảo mật</a></li>
+          <li><a href="terms.html">Điều khoản dịch vụ</a></li>
+          <li><a href="contact.html">Liên hệ chúng tôi</a></li>
         </ul>
       </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../js/dashboard.js"></script>
+    <script src="js/dashboard.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const username = sessionStorage.getItem("loggedInUsername"); // Lấy username từ sessionStorage
@@ -226,6 +234,24 @@
             window.location.href = "index.html"; // Hoặc 'login.html' tùy ý
           });
         }
+
+        // Notification filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const notifItems = document.querySelectorAll('.notif-item');
+        filterBtns.forEach(btn => {
+          btn.addEventListener('click', function() {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            const type = this.getAttribute('data-type');
+            notifItems.forEach(item => {
+              if (type === 'all' || item.classList.contains(type)) {
+                item.style.display = '';
+              } else {
+                item.style.display = 'none';
+              }
+            });
+          });
+        });
       });
     </script>
   </body>
