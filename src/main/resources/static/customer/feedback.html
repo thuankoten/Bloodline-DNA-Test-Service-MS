@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/feedback.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="dashboard-page">
+    <header class="dashboard-header">
+      <div class="container">
+        <div class="logo">
+          <a href="../index.html">
+            <i class="fas fa-dna"></i> <span>Bloodline</span>
+          </a>
+        </div>
+
+        <div class="header-right">
+          <div class="search-bar">
+            <input type="text" placeholder="Tìm kiếm..." />
+            <button><i class="fas fa-search"></i></button>
+          </div>
+
+          <div class="notification">
+            <i class="fas fa-bell"></i>
+            <span class="badge">3</span>
+          </div>
+
+          <div class="user-menu">
+            <img
+              src="img/user-avatar.jpg"
+              alt="Ảnh đại diện người dùng"
+              class="avatar"
+            />
+            <div class="user-info">
+              <span class="user-name"></span>
+              <span class="user-role">Khách hàng</span>
+            </div>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="dashboard-wrapper">
+      <aside class="sidebar">
+        <nav class="main-nav">
+          <ul>
+            <li class="active">
+              <a href="dashboard.html">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Bảng điều khiển</span>
+              </a>
+            </li>
+            <li>
+              <a href="my-tests.html">
+                <i class="fas fa-vial"></i>
+                <span>Các xét nghiệm của tôi</span>
+              </a>
+            </li>
+            <li>
+              <a href="order-test.html">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Đặt xét nghiệm mới</span>
+              </a>
+            </li>
+            <li>
+              <a href="results.html">
+                <i class="fas fa-file-medical-alt"></i>
+                <span>Kết quả xét nghiệm</span>
+              </a>
+            </li>
+            <li>
+              <a href="family-tree.html">
+                <i class="fas fa-sitemap"></i>
+                <span>Cây gia đình</span>
+              </a>
+            </li>
+            <li>
+              <a href="messages.html">
+                <i class="fas fa-comments"></i>
+                <span>Tin nhắn</span>
+                <span class="badge">5</span>
+              </a>
+            </li>
+            <li>
+              <a href="appointments.html">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Lịch hẹn</span>
+              </a>
+            </li>
+            <li>
+              <a href="profile.html">
+                <i class="fas fa-user-circle"></i>
+                <span>Hồ sơ của tôi</span>
+              </a>
+            </li>
+            <li>
+              <a href="settings.html">
+                <i class="fas fa-cog"></i>
+                <span>Cài đặt</span>
+              </a>
+            </li>
+            <li class="logout">
+              <a href="../login/login.html" id="logout-link">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Đăng xuất</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="container-fee">
+        <h2 class="inner-title">Gửi đánh giá dịch vụ</h2>
+
+        <div class="stars" id="starContainer">
+          <span class="star" data-value="1">&#9733;</span>
+          <span class="star" data-value="2">&#9733;</span>
+          <span class="star" data-value="3">&#9733;</span>
+          <span class="star" data-value="4">&#9733;</span>
+          <span class="star" data-value="5">&#9733;</span>
+        </div>
+
+        <textarea
+          id="feedback"
+          placeholder="Nhập đánh giá của bạn..."
+        ></textarea>
+        <button onclick="submitFeedback()">Gửi đánh giá</button>
+      </div>
+    </div>
+
+    <script src="../js/feedback.js"></script>
+  </body>
+</html>
