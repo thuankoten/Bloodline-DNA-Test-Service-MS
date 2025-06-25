@@ -4,18 +4,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const priceMap = {
     "dna-huyet-thong": [
-      { label: "STANDARD (5-7 ngày)", value: "4990000" },
-      { label: "EXPRESS (2-3 ngày)", value: "6990000" },
+      { label: "STANDARD (5 đến 7 ngày)", value: "4990000" },
+      { label: "EXPRESS (2 đến 3 ngày)", value: "6990000" },
       { label: "PREMIUM (24 giờ)", value: "9990000" },
     ],
     "gia-dinh": [
-      { label: "STANDARD (7-10 ngày)", value: "5990000" },
-      { label: "EXPRESS (3-5 ngày)", value: "7990000" },
+      { label: "STANDARD (7 đến 10 ngày)", value: "5990000" },
+      { label: "EXPRESS (3 đến 5 ngày)", value: "7990000" },
       { label: "PREMIUM (48 giờ)", value: "11990000" },
     ],
     "dna-phap-y": [
-      { label: "STANDARD (10-12 ngày)", value: "8990000" },
-      { label: "EXPRESS (5-7 ngày)", value: "12990000" },
+      { label: "STANDARD (10 đến 12 ngày)", value: "8990000" },
+      { label: "EXPRESS (5 đến 7 ngày)", value: "12990000" },
       { label: "PREMIUM (3 ngày)", value: "15990000" },
     ],
   };
