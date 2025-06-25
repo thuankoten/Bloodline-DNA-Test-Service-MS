@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/manager-feedback.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="dashboard-page">
+    <header class="dashboard-header">
+      <div class="container">
+        <div class="logo">
+          <a href="index.html">
+            //Thay đổi đường dẫn nếu cần <i class="fas fa-dna"></i>
+            <span>Bloodline</span>
+          </a>
+        </div>
+
+        <div class="header-right">
+          <div class="search-bar">
+            <input type="text" placeholder="Tìm kiếm..." />
+            <button><i class="fas fa-search"></i></button>
+          </div>
+
+          <div class="notification">
+            <i class="fas fa-bell"></i>
+            <span class="badge">3</span>
+          </div>
+
+          <div class="user-menu">
+            <img
+              src="img/user-avatar.jpg"
+              alt="Ảnh đại diện người dùng"
+              class="avatar"
+            />
+            <div class="user-info">
+              <span class="user-name"></span>
+              <span class="user-role">Quản lý</span>
+            </div>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="dashboard-wrapper">
+      <aside class="sidebar">
+        <nav class="main-nav">
+          <ul>
+            <li class="active">
+              <a href="dashboard.html">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Bảng điều khiển</span>
+              </a>
+            </li>
+            <li>
+              <a href="customer-tests.html">
+                <i class="fas fa-vial"></i>
+                <span>Quản lý đơn đặt xét nghiệm</span>
+              </a>
+            </li>
+            <li>
+              <a href="results-manager.html">
+                <i class="fas fa-file-medical-alt"></i>
+                <span>Quản lý kết quả xét nghiệm</span>
+              </a>
+            </li>
+            <li>
+              <a href="customer-profile.html">
+                <i class="fa-solid fa-hospital-user"></i>
+                <span>Quản lý hồ sơ khách hàng</span>
+              </a>
+            </li>
+            <li>
+              <a href="support.html">
+                <i class="fas fa-comments"></i>
+                <span>Hỗ trợ khách hàng</span>
+              </a>
+            </li>
+            <li>
+              <a href="appointments-manager.html">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Quản lý lịch hẹn</span>
+              </a>
+            </li>
+            <li>
+              <a href="staff-manager.html">
+                <i class="fas fa-user-circle"></i>
+                <span>Quản lý nhân viên</span>
+              </a>
+            </li>
+            <li>
+              <a href="family-tree.html">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Thống kê và báo cáo</span>
+              </a>
+            </li>
+            <li>
+              <a href="settings.html">
+                <i class="fas fa-cog"></i>
+                <span>Cài đặt</span>
+              </a>
+            </li>
+            <li class="logout">
+              <a href="#" id="logout-link">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Đăng xuất</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="container-fee">
+        <h2>Quản lý Feedback từ người dùng</h2>
+
+        <div>
+          🔍
+          <input class="search"
+            type="text"
+            id="searchInput"
+            placeholder="Tìm theo tên hoặc nội dung feedback..."
+          />
+          <select  class="star-selected" id="starFilter">
+            <option value="">Tất cả</option>
+            <option value="5">5 sao</option>
+            <option value="4">4 sao</option>
+            <option value="3">3 sao</option>
+            <option value="2">2 sao</option>
+            <option value="1">1 sao</option>
+          </select>
+          <button class="search-button" onclick="loadFeedbacks()">Tìm</button>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Khách hàng</th>
+              <th>Rating</th>
+              <th>Phản hồi</th>
+              <th>Thời gian</th>
+              <th>Thao tác</th>
+            </tr>
+          </thead>
+          <tbody id="feedbackTable">
+            <!-- dữ liệu sẽ được hiển thị ở đây -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
