@@ -34,6 +34,7 @@ public class OrderTestController {
         String sample = body.get("sample");
         OrderTest order = optional.get();
         order.setSample(sample);
+        order.setStatus("0");
         orderTestRepository.save(order);
 
         return ResponseEntity.ok(order);

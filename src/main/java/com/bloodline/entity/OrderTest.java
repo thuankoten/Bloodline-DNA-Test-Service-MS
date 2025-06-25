@@ -27,6 +27,9 @@ public class OrderTest {
     @Column(name = "sample")
     private String sample;
 
+    @Column(name = "status")
+    private String status;
+
 
     // Getters & Setters
     public Long getId() {
@@ -83,6 +86,15 @@ public class OrderTest {
 
     public void setSample(String sample) {
         this.sample = sample;
+    }
+
+    
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }
