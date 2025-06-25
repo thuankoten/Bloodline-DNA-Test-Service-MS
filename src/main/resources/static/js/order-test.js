@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
       { label: "PREMIUM (3 ngày)", value: "15990000" },
     ],
   };
-
+ 
   testType.addEventListener("change", function () {
     const selected = this.value;
     const options = priceMap[selected];
