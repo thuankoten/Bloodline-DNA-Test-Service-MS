@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!username || !usedServicesList) return;
 
-  // Tạo modal xác nhận ẩn trước
   const modal = document.createElement("div");
   modal.id = "sample-confirm-modal";
   modal.innerHTML = `
@@ -77,12 +76,20 @@ document.addEventListener("DOMContentLoaded", function () {
         const select = li.querySelector(".sample-type-select");
         const statusSpan = li.querySelector(".test-status");
 
-        // Nếu đã có mẫu → set lại + khóa chọn
         if (order.sample) {
           select.value = order.sample;
           select.disabled = true;
-          statusSpan.textContent = "Đang chờ xét nghiệm";
-          statusSpan.classList.add("waiting");
+
+          if (order.status === "0") {
+            statusSpan.textContent = "Đang xét nghiệm";
+            statusSpan.classList.add("waiting");
+          } else if (order.status === "1") {
+            statusSpan.textContent = "Đã hoàn tất";
+            statusSpan.classList.add("done");
+          } else if (order.status === "2") {
+            statusSpan.textContent = "Chờ kết quả";
+            statusSpan.classList.add("pending-result");
+          }
         } else {
           select.addEventListener("change", () => {
             const sample = select.value;
