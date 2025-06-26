@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bảng điều khiển - Dịch vụ xét nghiệm DNA Bloodline</title>
+    <title>Quản lý hồ sơ khách hàng - Dịch vụ xét nghiệm DNA Bloodline</title>
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/customer-profile.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -15,7 +16,7 @@
     <header class="dashboard-header">
       <div class="container">
         <div class="logo">
-          <a href="index.html"> //Thay đổi đường dẫn nếu cần
+          <a href="index.html">
             <i class="fas fa-dna"></i> <span>Bloodline</span>
           </a>
         </div>
@@ -51,8 +52,8 @@
       <aside class="sidebar">
         <nav class="main-nav">
           <ul>
-            <li class="active">
-              <a href="dashboard.html">
+            <li class="">
+              <a href="manager-dashboard.html">
                 <i class="fas fa-tachometer-alt"></i>
                 <span>Bảng điều khiển</span>
               </a>
@@ -69,7 +70,7 @@
                 <span>Quản lý kết quả xét nghiệm</span>
               </a>
             </li>
-            <li>
+            <li class="active">
             <a href="customer-profile.html">
                 <i class="fa-solid fa-hospital-user"></i>
                 <span>Quản lý hồ sơ khách hàng</span>
@@ -115,68 +116,61 @@
         </nav>
       </aside>
 
-      <main class="dashboard-main">
+       <main class="dashboard-main">
         <div class="page-header">
-          <h1>Bảng điều khiển</h1>
-          <p>
-            Chào mừng Tổng quản lý đã trở lại!
-          </p>
+          <h1>Quản lý hồ sơ khách hàng</h1>
         </div>
+        <div class="customer-table-container">
+          <!-- Nút mở form -->
+          <button id="showAddCustomerFormBtn">Thêm khách hàng</button>
 
-        <section class="system-notifications-floating">
-    <div class="notif-card">
-      <div class="notif-header">
-        <h2>Thông báo hệ thống</h2>
-        <a href="notifications.html" class="notif-view-all">Xem tất cả</a>
-      </div>
-
-      <div class="notif-filter">
-        <button class="filter-btn active" data-type="all">Tất cả</button>
-        <button class="filter-btn" data-type="type-user">Khách hàng</button>
-        <button class="filter-btn" data-type="type-order">Đơn xét nghiệm</button>
-        <button class="filter-btn" data-type="type-result">Kết quả xét nghiệm</button>
-        <button class="filter-btn" data-type="type-date">Lịch hẹn</button>
-      </div>
-
-      <ul class="notif-list">
-        <li class="notif-item type-user">
-          <span class="notif-icon"><i class="fas fa-user-plus"></i></span>
-          <span class="notif-content">
-            <a href="customer-profile.html?id=nguyenvana">Khách hàng mới <b>Nguyễn Văn A</b> vừa đăng ký tài khoản.</a>
-          </span>
-          <span class="notif-time">2 phút trước</span>
-        </li>
-        <li class="notif-item type-order">
-          <span class="notif-icon"><i class="fas fa-vial"></i></span>
-          <span class="notif-content">
-            <a href="customer-tests.html?order=BL2023-004">Đơn xét nghiệm <b>#BL2023-004</b> vừa được tạo.</a>
-          </span>
-          <span class="notif-time">10 phút trước</span>
-        </li>
-        <li class="notif-item type-result">
-          <span class="notif-icon"><i class="fas fa-file-medical-alt"></i></span>
-          <span class="notif-content">
-            <a href="results-manager.html?result=BL2023-002">Kết quả xét nghiệm <b>#BL2023-002</b> đã sẵn sàng để duyệt.</a>
-          </span>
-          <span class="notif-time">30 phút trước</span>
-        </li>
-        <li class="notif-item notif-alert type-result">
-          <span class="notif-icon"><i class="fas fa-exclamation-triangle"></i></span>
-          <span class="notif-content">
-            <a href="customer-tests.html?status=error">Cảnh báo: Có 1 mẫu xét nghiệm bị lỗi cần xử lý.</a>
-          </span>
-          <span class="notif-time">1 giờ trước</span>
-        </li>
-        <li class="notif-item type-date">
-          <span class="notif-icon"><i class="fas fa-calendar-alt"></i></span>
-          <span class="notif-content">
-            <a href="appointments-manager.html?result=2025-06-01">Đã thêm một lịch hẹn mới vào ngày <b>2025-06-01</b>.</a>
-          </span>
-          <span class="notif-time">1 giờ trước</span>
-        </li>
-      </ul>
-    </div>
-  </section>
+          <!-- Form thêm khách hàng 2 cột -->
+          <div id="addCustomerForm" style="display: none;">
+            <div class="form-row">
+              <input type="text" id="lastName" placeholder="Họ" required>
+              <input type="text" id="email" placeholder="Email" required>
+            </div>
+            <div class="form-row">
+              <input type="text" id="firstName" placeholder="Tên" required>
+              <input type="text" id="phone" placeholder="Số điện thoại">
+            </div>
+            <div class="form-row">
+              <input type="text" id="username" placeholder="Username">
+              <input type="password" id="password" placeholder="Password" required>
+            </div>
+            <div class="form-row">
+              <select id="active">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+              </select>
+              <input type="text" id="role" placeholder="Role">
+            </div>
+            <div class="form-row form-actions">
+              <button onclick="addCustomer()">Thêm khách hàng</button>
+              <button type="button" id="cancelAddCustomerBtn">Hủy</button>
+            </div>
+          </div>
+          <!-- Ô tìm kiếm khách hàng -->
+          <input type="text" id="customerSearchInput" placeholder="Tìm kiếm khách hàng..." style="margin-bottom: 16px; width: 300px;">
+          <table class="customer-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Họ</th>
+                <th>Tên</th>
+                <th>Password</th>
+                <th>Số điện thoại</th>
+                <th>Username</th>
+                <th>Active</th>
+                <th>Role</th>
+                <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dữ liệu sẽ được render ở đây -->
+            </tbody>
+          </table>
         </div>
       </main>
     </div>
@@ -252,7 +246,184 @@
             });
           });
         });
+
+        let allCustomers = [];
+
+        function renderCustomerTable(customers) {
+          const tbody = document.querySelector('.customer-table tbody');
+          tbody.innerHTML = '';
+          customers.filter(customer => customer.role === 'customer').forEach(customer => {
+            tbody.innerHTML += `
+              <tr>
+                <td>${customer.id}</td>
+                <td>${customer.email}</td>
+                <td>${customer.firstName}</td>
+                <td>${customer.lastName}</td>
+                <td>*******</td>
+                <td>${customer.phone}</td>
+                <td>${customer.username}</td>
+                <td>${customer.active ? 'true' : 'false'}</td>
+                <td>${customer.role}</td>
+                <td>
+                  <button class="edit-btn" onclick='editCustomer(${JSON.stringify(customer).replace(/'/g, "\\'")})'>Sửa</button>
+                  <button class="delete-btn" onclick="deleteCustomer(${customer.id})">Xóa</button>
+                </td>
+              </tr>
+            `;
+          });
+        }
+
+        // Khi tải trang, lấy dữ liệu và render bảng
+        fetch('/api/customers')
+          .then(response => response.json())
+          .then(data => {
+            allCustomers = data;
+            renderCustomerTable(allCustomers);
+          });
+
+          // Xử lý tìm kiếm
+          document.getElementById('customerSearchInput').addEventListener('input', function() {
+            const keyword = this.value.trim().toLowerCase();
+            const filtered = allCustomers.filter(customer => {
+              return (
+                (customer.firstName && customer.firstName.toLowerCase().includes(keyword)) ||
+                (customer.lastName && customer.lastName.toLowerCase().includes(keyword)) ||
+                (customer.username && customer.username.toLowerCase().includes(keyword)) ||
+                (customer.email && customer.email.toLowerCase().includes(keyword)) ||
+                (customer.phone && customer.phone.includes(keyword))
+              );
+            });
+            renderCustomerTable(filtered);
+          });
+
+          // Ẩn/hiện form thêm khách hàng
+          const showBtn = document.getElementById('showAddCustomerFormBtn');
+          const form = document.getElementById('addCustomerForm');
+          const cancelBtn = document.getElementById('cancelAddCustomerBtn');
+
+          showBtn.addEventListener('click', function() {
+            form.style.display = 'block';
+            showBtn.style.display = 'none';
+          });
+
+          cancelBtn.addEventListener('click', function() {
+            form.style.display = 'none';
+            showBtn.style.display = 'inline-block';
+            form.querySelectorAll('input').forEach(input => input.value = '');
+            form.querySelector('select').selectedIndex = 0;
+            form.removeAttribute('data-edit-id');
+          });
       });
+
+      // Thêm khách hàng mới (ví dụ)
+      function addCustomer() {
+        const form = document.getElementById('addCustomerForm');
+        const editId = form.getAttribute('data-edit-id');
+        const email = document.getElementById('email').value.trim();
+        const firstName = document.getElementById('firstName').value.trim();
+        const lastName = document.getElementById('lastName').value.trim();
+        const password = document.getElementById('password').value;
+        const phone = document.getElementById('phone').value.trim();
+        const username = document.getElementById('username').value.trim();
+        const active = document.getElementById('active').value === "true";
+        let role = document.getElementById('role').value.trim();
+
+        // Validation
+        if (!email.includes('@gmail.com')) {
+          alert('Email phải chứa ký tự @');
+          return;
+        }
+        if (password.length < 8) {
+          alert('Password phải có ít nhất 8 ký tự');
+          return;
+        }
+        if (!/^\d{10}$/.test(phone)) {
+          alert('Số điện thoại phải là 10 chữ số');
+          return;
+        }
+        // Role mặc định là customer nếu để trống hoặc khác customer
+        if (!role || role.toLowerCase() !== 'customer') {
+          role = 'customer';
+          document.getElementById('role').value = 'customer';
+        }
+
+        const customer = {
+          email,
+          firstName,
+          lastName,
+          password,
+          phone,
+          username,
+          active,
+          role
+        };
+
+        let url = '/api/customers';
+        let method = 'POST';
+
+        if (editId) {
+          url += `/${editId}`;
+          method = 'PUT';
+        }
+
+        fetch(url, {
+          method: method,
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(customer)
+        })
+        .then(response => response.json())
+        .then(data => {
+          alert(editId ? 'Cập nhật khách hàng thành công!' : 'Thêm khách hàng thành công!');
+          location.reload();
+        })
+        .catch(error => {
+          alert('Có lỗi khi lưu khách hàng!');
+          console.error(error);
+        });
+      }
+
+      function deleteCustomer(id) {
+        if (confirm('Bạn có chắc chắn muốn xóa khách hàng này?')) {
+          fetch(`/api/customers/${id}`, {
+            method: 'DELETE'
+          })
+          .then(response => {
+            if (response.ok) {
+              alert('Xóa khách hàng thành công!');
+              location.reload();
+            } else {
+              alert('Xóa khách hàng thất bại!');
+            }
+          })
+          .catch(error => {
+            alert('Có lỗi khi xóa khách hàng!');
+            console.error(error);
+          });
+        }
+      }
+
+      function editCustomer(customer) {
+        const form = document.getElementById('addCustomerForm');
+        form.style.display = 'block';
+        document.getElementById('showAddCustomerFormBtn').style.display = 'none';
+
+        document.getElementById('email').value = customer.email;
+        document.getElementById('firstName').value = customer.firstName;
+        document.getElementById('lastName').value = customer.lastName;
+        document.getElementById('password').value = customer.password || '';
+        document.getElementById('phone').value = customer.phone;
+        document.getElementById('username').value = customer.username;
+        document.getElementById('active').value = customer.active ? "true" : "false";
+        document.getElementById('role').value = customer.role;
+
+        // Đổi tên nút (tùy chọn)
+        form.querySelector('button[onclick="addCustomer()"]').textContent = "Cập nhật khách hàng";
+
+        // Lưu lại id khách hàng đang sửa
+        form.setAttribute('data-edit-id', customer.id);
+      }
     </script>
   </body>
 </html>
