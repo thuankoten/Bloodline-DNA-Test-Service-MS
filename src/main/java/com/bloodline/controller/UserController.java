@@ -2,6 +2,8 @@ package com.bloodline.controller;
 
 import com.bloodline.entity.User;
 import com.bloodline.repository.UserRepository;
+import com.bloodline.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.json.JSONObject;
@@ -9,9 +11,11 @@ import org.json.JSONObject;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
@@ -121,7 +125,7 @@ public class UserController {
     }
 
     @PostMapping("/change-password")
-public String changePassword(@RequestBody String body) {
+    public String changePassword(@RequestBody String body) {
     JSONObject response = new JSONObject();
 
     try {
@@ -152,4 +156,32 @@ public String changePassword(@RequestBody String body) {
                        .put("message", "Lỗi hệ thống: " + e.getMessage()).toString();
     }
 }
+    @Autowired
+    private UserService userService;
+
+    @GetMapping
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<User> getUserById(@PathVariable int id) {
+        return userService.getUserById(id);
+    }
+
+    @PostMapping
+    public User addUser(@RequestBody User user) {
+        return userService.saveUser(user);
+    }
+
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable int id, @RequestBody User user) {
+        user.setId(id);
+        return userService.saveUser(user);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable int id) {
+        userService.deleteUser(id);
+    }
 }
