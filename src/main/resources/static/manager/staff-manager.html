@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý hồ sơ khách hàng - Dịch vụ xét nghiệm DNA Bloodline</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/customer-profile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="dashboard-page">
+    <header class="dashboard-header">
+      <div class="container">
+        <div class="logo">
+          <a href="staff-manager.html">
+            <i class="fas fa-dna"></i> <span>Bloodline</span>
+          </a>
+        </div>
+
+        <div class="header-right">
+          <div class="search-bar">
+            <input type="text" placeholder="Tìm kiếm..." />
+            <button><i class="fas fa-search"></i></button>
+          </div>
+
+          <div class="notification">
+            <i class="fas fa-bell"></i>
+            <span class="badge">3</span>
+          </div>
+
+          <div class="user-menu">
+            <div class="user-info">
+              <span class="user-name"></span>
+              <span class="user-role">Quản lý</span>
+            </div>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="dashboard-wrapper">
+      <aside class="sidebar">
+        <nav class="main-nav">
+          <ul>
+            <li class="">
+              <a href="manager-dashboard.html">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Bảng điều khiển</span>
+              </a>
+            </li>
+            <li>
+              <a href="customer-tests.html">
+                <i class="fas fa-vial"></i>
+                <span>Quản lý đơn đặt xét nghiệm</span>
+              </a>
+            </li>
+            <li>
+              <a href="results-manager.html">
+                <i class="fas fa-file-medical-alt"></i>
+                <span>Quản lý kết quả xét nghiệm</span>
+              </a>
+            </li>
+            <li>
+            <a href="customer-profile.html">
+                <i class="fa-solid fa-hospital-user"></i>
+                <span>Quản lý hồ sơ khách hàng</span>
+              </a>
+            </li>
+            <li>
+              <a href="support.html">
+                <i class="fas fa-comments"></i>
+                <span>Hỗ trợ khách hàng</span>
+              </a>
+            </li>
+            <li>
+              <a href="appointments-manager.html">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Quản lý lịch hẹn</span>
+              </a>
+            </li>
+            <li class="active">
+              <a href="staff-manager.html">
+                <i class="fas fa-user-circle"></i>
+                <span>Quản lý nhân viên</span>
+              </a>
+            </li>
+            <li>
+            <a href="family-tree.html">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Thống kê và báo cáo</span>
+              </a>
+            </li>
+            <li>
+              <a href="settings.html">
+                <i class="fas fa-cog"></i>
+                <span>Cài đặt</span>
+              </a>
+            </li>
+            <li class="logout">
+              <a href="#" id="logout-link">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Đăng xuất</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+       <main class="dashboard-main">
+        <div class="page-header">
+          <h1>Quản lý nhân viên</h1>
+        </div>
+        <div class="customer-table-container">
+          <!-- Nút mở form -->
+          <button id="showAddCustomerFormBtn">Thêm nhân viên mới</button>
+
+          <!-- Form thêm khách hàng 2 cột -->
+          <div id="addCustomerForm" style="display: none;">
+            <div class="form-row">
+              <input type="text" id="lastName" placeholder="Họ" required>
+              <input type="text" id="email" placeholder="Email" required>
+            </div>
+            <div class="form-row">
+              <input type="text" id="firstName" placeholder="Tên" required>
+              <input type="text" id="phone" placeholder="Số điện thoại">
+            </div>
+            <div class="form-row">
+              <input type="text" id="username" placeholder="Username">
+              <input type="password" id="password" placeholder="Password" required>
+            </div>
+            <div class="form-row">
+              <select id="active">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+              </select>
+              <input type="text" id="role" placeholder="Role">
+            </div>
+            <div class="form-row form-actions">
+              <button onclick="addCustomer()">Thêm nhân viên</button>
+              <button type="button" id="cancelAddCustomerBtn">Hủy</button>
+            </div>
+          </div>
+          <!-- Ô tìm kiếm khách hàng -->
+          <input type="text" id="customerSearchInput" placeholder="Tìm kiếm nhân viên..." style="margin-bottom: 16px; width: 300px;">
+          <table class="customer-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Họ</th>
+                <th>Tên</th>
+                <th>Password</th>
+                <th>Số điện thoại</th>
+                <th>Username</th>
+                <th>Active</th>
+                <th>Role</th>
+                <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dữ liệu sẽ được render ở đây -->
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+
+    <footer class="dashboard-footer">
+      <div class="container">
+        <p>&copy; 2023 Dịch vụ xét nghiệm DNA Bloodline. Bảo lưu mọi quyền.</p>
+        <ul class="footer-links">
+          <li><a href="privacy.html">Chính sách bảo mật</a></li>
+          <li><a href="terms.html">Điều khoản dịch vụ</a></li>
+          <li><a href="contact.html">Liên hệ chúng tôi</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/staff-manager.js"></script>
+  </body>
+</html>
