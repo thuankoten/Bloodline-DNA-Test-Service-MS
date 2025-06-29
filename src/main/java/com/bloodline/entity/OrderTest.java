@@ -18,6 +18,15 @@ public class OrderTest {
     @Column(name = "recipient_name")
     private String recipientName;
 
+    @Column(name = "recipient_phone")
+    private String recipientPhone;
+
+    @Column(name = "recipient_address")
+    private String recipientAddress;
+
+    @Column(name = "selected_package_label")
+    private String selectedPackageLabel;
+
     @Column(name = "appointment_date")
     private String appointmentDate;
 
@@ -64,6 +73,14 @@ public class OrderTest {
         this.recipientName = recipientName;
     }
 
+    public String getRecipientPhone() { return recipientPhone; }  
+    public void setRecipientPhone(String recipientPhone) { this.recipientPhone = recipientPhone; }
+
+    public String getRecipientAddress() { return recipientAddress; } 
+    public void setRecipientAddress(String recipientAddress) { this.recipientAddress = recipientAddress; }
+
+    public String getSelectedPackageLabel() { return selectedPackageLabel; } 
+    public void setSelectedPackageLabel(String selectedPackageLabel) { this.selectedPackageLabel = selectedPackageLabel; }
     public String getAppointmentDate() {
         return appointmentDate;
     }
