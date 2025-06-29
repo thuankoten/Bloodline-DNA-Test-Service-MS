@@ -13,11 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
  * Khởi tạo các phần tử giao diện người dùng (UI) của Dashboard
  */
 function initDashboardUI() {
-  // Nút chuyển đổi thanh bên (sidebar) trên di động
-  const sidebarToggle = document.createElement("button");
-  sidebarToggle.className = "sidebar-toggle";
-  sidebarToggle.innerHTML = '<i class="fas fa-bars"></i>';
-
+  
   const header = document.querySelector(".dashboard-header .container");
   if (header) {
     header.insertBefore(sidebarToggle, header.firstChild);
