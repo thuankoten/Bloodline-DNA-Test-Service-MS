@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
       el.textContent = username;
     });
 
-    fetch(`http://localhost:8080/api/user?username=${username}`)
+    fetch(`http://localhost:8080/api/users/user?username=${username}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success && data.user) {
