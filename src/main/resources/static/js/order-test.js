@@ -19,12 +19,12 @@ document.addEventListener("DOMContentLoaded", function () {
       { label: "PREMIUM (3 ngày)", value: "15990000" },
     ],
   };
- 
+
   testType.addEventListener("change", function () {
     const selected = this.value;
     const options = priceMap[selected];
 
-    // Cập nhật các lựa chọn giá
+    
     if (!options) {
       testPriceOptions.innerHTML =
         '<p style="color: #888;">Vui lòng chọn loại xét nghiệm</p>';
@@ -35,9 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .map(
         (opt, index) => `
         <label>
-          <input type="radio" name="priceOption" value="${opt.value}" ${
-          index === 0 ? "required" : ""
-        } />
+          <input type="radio" name="priceOption" value="${opt.value}" ${index === 0 ? "required" : ""} />
           ${opt.label} - ${parseInt(opt.value).toLocaleString()} VNĐ
         </label>
       `
@@ -47,21 +45,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const locationGroup = document.getElementById("location-group");
     if (selected === "dna-phap-y") {
       locationGroup.style.display = "none";
-
-      locationGroup
-        .querySelectorAll("input[name='location']")
-        .forEach((input) => {
-          input.required = false;
-          input.checked = false;
-        });
+      locationGroup.querySelectorAll("input[name='location']").forEach((input) => {
+        input.required = false;
+        input.checked = false;
+      });
     } else {
       locationGroup.style.display = "block";
-
-      locationGroup
-        .querySelectorAll("input[name='location']")
-        .forEach((input) => {
-          input.required = true;
-        });
+      locationGroup.querySelectorAll("input[name='location']").forEach((input) => {
+        input.required = true;
+      });
     }
   });
 });
@@ -73,78 +65,29 @@ document.addEventListener("DOMContentLoaded", function () {
   const addressModal = document.getElementById("address-modal");
   const closeButton = addressModal.querySelector(".close-button");
   const addressForm = document.getElementById("address-form");
+  const addressGroup = document.getElementById("recipient-address").closest(".form-group");
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
     const selectedType = testType.value;
-    const selectedLocation = form.querySelector(
-      "input[name='location']:checked"
-    )?.value;
-    const selectedPriceRadio = document.querySelector(
-      "input[name='priceOption']:checked"
-    );
+    const selectedLocation = form.querySelector("input[name='location']:checked")?.value;
+    const selectedPriceRadio = document.querySelector("input[name='priceOption']:checked");
     const appointmentDate = document.getElementById("appointment-date").value;
     const appointmentTime = document.getElementById("appointment-time").value;
-    const username = sessionStorage.getItem("loggedInUsername");
 
-    if (!selectedType) {
-      alert("Vui lòng chọn loại xét nghiệm.");
-      return;
-    }
+    if (!selectedType) return alert("Vui lòng chọn loại xét nghiệm.");
+    if (!selectedPriceRadio) return alert("Vui lòng chọn gói dịch vụ.");
+    if (!appointmentDate || !appointmentTime) return alert("Vui lòng chọn ngày và giờ hẹn.");
 
-    if (!selectedPriceRadio) {
-      alert("Vui lòng chọn gói dịch vụ.");
-      return;
-    }
+    // Hiển thị modal nhập thông tin người nhận
+    addressModal.classList.remove("hidden");
 
-    const selectedPriceLabel = selectedPriceRadio
-      .closest("label")
-      .innerText.trim();
-
-    if (!appointmentDate || !appointmentTime) {
-      alert("Vui lòng chọn ngày và giờ hẹn.");
-      return;
-    }
-
+    // Ẩn địa chỉ nếu không phải "Tại nhà"
     if (selectedType === "dna-phap-y" || selectedLocation === "clinic") {
-      fetch("http://localhost:8080/api/appointments", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          testType: selectedType,
-          appointmentDate,
-          appointmentTime,
-          recipientName: null,
-          recipientPhone: null,
-          recipientAddress: null,
-          selectedPackageLabel: selectedPriceLabel, // Gửi label về BE
-        }),
-      })
-        .then((res) => {
-          if (!res.ok) throw new Error("Lỗi từ server!");
-          return res.json();
-        })
-        .then(() => {
-          alert("Đặt hẹn thành công tại cơ sở y tế.");
-          form.reset();
-          locationGroup.style.display = "block";
-        })
-        .catch((err) => {
-          console.error("Lỗi khi đặt lịch:", err);
-          alert("Không thể gửi yêu cầu đặt hẹn.");
-        });
-
-      return;
-    }
-
-    if (selectedLocation === "home") {
-      addressModal.classList.remove("hidden");
+      addressGroup.style.display = "none";
     } else {
-      alert("Vui lòng chọn hình thức xét nghiệm.");
+      addressGroup.style.display = "block";
     }
   });
 
@@ -163,28 +106,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const recipientName = document.getElementById("recipient-name").value;
     const recipientPhone = document.getElementById("recipient-phone").value;
-    const recipientAddress = document.getElementById("recipient-address").value;
+    const recipientAddressField = document.getElementById("recipient-address");
     const appointmentDate = document.getElementById("appointment-date").value;
     const appointmentTime = document.getElementById("appointment-time").value;
     const selectedType = testType.value;
-    const selectedPriceRadio = document.querySelector(
-      "input[name='priceOption']:checked"
-    );
+    const selectedPriceRadio = document.querySelector("input[name='priceOption']:checked");
+    const selectedLocation = form.querySelector("input[name='location']:checked")?.value;
     const username = sessionStorage.getItem("loggedInUsername");
 
-    if (!recipientName || !recipientPhone || !recipientAddress) {
-      alert("Vui lòng điền đầy đủ thông tin địa chỉ.");
-      return;
+    const recipientAddress =
+      selectedType === "dna-phap-y" || selectedLocation === "clinic"
+        ? null
+        : recipientAddressField.value;
+
+    if (!recipientName || !recipientPhone) {
+      return alert("Vui lòng nhập đầy đủ họ tên và số điện thoại.");
     }
 
-    if (!selectedPriceRadio) {
-      alert("Vui lòng chọn gói dịch vụ.");
-      return;
+    if (recipientAddressField.closest(".form-group").style.display !== "none" && !recipientAddress) {
+      return alert("Vui lòng nhập địa chỉ nhận kit.");
     }
 
-    const selectedPriceLabel = selectedPriceRadio
-      .closest("label")
-      .innerText.trim();
+    const selectedPriceLabel = selectedPriceRadio.closest("label").innerText.trim();
 
     fetch("http://localhost:8080/api/appointments", {
       method: "POST",
@@ -199,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
         recipientName,
         recipientPhone,
         recipientAddress,
-        selectedPackageLabel: selectedPriceLabel, // Gửi label về BE
+        selectedPackageLabel: selectedPriceLabel,
       }),
     })
       .then((res) => {
@@ -207,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return res.json();
       })
       .then(() => {
-        alert("Đã xác nhận địa chỉ và đặt lịch nhận kit tại nhà!");
+        alert("Đặt lịch thành công!");
         form.reset();
         addressForm.reset();
         addressModal.classList.add("hidden");
@@ -215,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .catch((err) => {
         console.error("Lỗi khi gửi thông tin:", err);
-        alert("Không thể gửi thông tin nhận kit.");
+        alert("Không thể gửi thông tin.");
       });
   });
 });
