@@ -320,7 +320,7 @@ function initRegisterForm() {
         '<i class="fas fa-spinner fa-spin"></i> Đang tạo tài khoản...';
       submitBtn.disabled = true;
 
-      fetch("http://localhost:8080/api/register", {
+      fetch("http://localhost:8080/api/users/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

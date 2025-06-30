@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
@@ -15,7 +15,7 @@
     <header class="dashboard-header">
       <div class="container">
         <div class="logo">
-          <a href="index.html"> //Thay đổi đường dẫn nếu cần
+          <a href="../index.html">
             <i class="fas fa-dna"></i> <span>Bloodline</span>
           </a>
         </div>
@@ -26,11 +26,7 @@
             <button><i class="fas fa-search"></i></button>
           </div>
 
-          <div class="notification">
-            <i class="fas fa-bell"></i>
-            <span class="badge">3</span>
-          </div>
-
+          
           <div class="user-menu">
             <img
               src="img/user-avatar.jpg"
@@ -67,6 +63,12 @@
               <a href="results-manager.html">
                 <i class="fas fa-file-medical-alt"></i>
                 <span>Quản lý kết quả xét nghiệm</span>
+              </a>
+            </li>
+           <li>
+              <a href="manager-feedback.html">
+                <i class="fas fa-comments"></i>
+                <span>Feedback</span>
               </a>
             </li>
             <li>
@@ -106,7 +108,7 @@
               </a>
             </li>
             <li class="logout">
-              <a href="#" id="logout-link">
+              <a href="../login/login.html">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Đăng xuất</span>
               </a>
@@ -193,7 +195,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/dashboard.js"></script>
+    <script src="../js/dashboard.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const username = sessionStorage.getItem("loggedInUsername"); // Lấy username từ sessionStorage

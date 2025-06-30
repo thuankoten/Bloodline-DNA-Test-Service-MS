@@ -10,24 +10,45 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <style>
+      .user-feedback-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      .user-feedback-table th,
+      .user-feedback-table td {
+        padding: 10px;
+        border: 1px solid #ccc;
+        text-align: left;
+      }
+      .stars {
+        font-size: 24px;
+        color: #ccc;
+        margin-bottom: 10px;
+        cursor: pointer;
+      }
+      .star.selected {
+        color: gold;
+      }
+      textarea {
+        width: 100%;
+        height: 100px;
+        margin-bottom: 10px;
+      }
+    </style>
   </head>
   <body class="dashboard-page">
     <header class="dashboard-header">
       <div class="container">
         <div class="logo">
-          <a>
-            <i class="fas fa-dna"></i> <span>Bloodline</span>
-          </a>
+          <a><i class="fas fa-dna"></i> <span>Bloodline</span></a>
         </div>
-
         <div class="header-right">
           <div class="search-bar">
             <input type="text" placeholder="Tìm kiếm..." />
             <button><i class="fas fa-search"></i></button>
           </div>
-
-
-
           <div class="user-menu">
             <img src="img/user-avatar.jpg" alt="Avatar" class="avatar" />
             <div class="user-info">
@@ -50,49 +71,42 @@
                 <span>Bảng điều khiển</span>
               </a>
             </li>
-
             <li>
               <a href="profile.html">
                 <i class="fas fa-user-circle"></i>
                 <span>Hồ sơ của tôi</span>
               </a>
             </li>
-
             <li>
               <a href="appointments.html">
                 <i class="fas fa-calendar-alt"></i>
                 <span>Lịch hẹn</span>
               </a>
             </li>
-
             <li>
               <a href="order-test.html">
                 <i class="fas fa-shopping-cart"></i>
                 <span>Đăng ký đặt hẹn xét nghiệm</span>
               </a>
             </li>
-            
             <li>
               <a href="my-tests.html">
                 <i class="fas fa-vial"></i>
                 <span>Các xét nghiệm của tôi</span>
               </a>
             </li>
-
             <li>
               <a href="results.html">
                 <i class="fas fa-file-medical-alt"></i>
                 <span>Kết quả xét nghiệm</span>
               </a>
             </li>
-
             <li class="active">
               <a href="feedback.html">
                 <i class="fas fa-comments"></i>
                 <span>Feedback</span>
               </a>
             </li>
-
             <li class="logout">
               <a href="../login/login.html" id="logout-link">
                 <i class="fas fa-sign-out-alt"></i>
@@ -119,6 +133,22 @@
           placeholder="Nhập đánh giá của bạn..."
         ></textarea>
         <button onclick="submitFeedback()">Gửi đánh giá</button>
+
+        <hr />
+
+        <h2 class="inner-title">Đánh giá bạn đã gửi</h2>
+        <table class="user-feedback-table">
+          <thead>
+            <tr>
+              <th>Ngày gửi</th>
+              <th>Đánh giá</th>
+              <th>Phản hồi từ quản lý</th>
+            </tr>
+          </thead>
+          <tbody id="userFeedbackList">
+            <!-- Các đánh giá người dùng sẽ hiển thị ở đây -->
+          </tbody>
+        </table>
       </div>
     </div>
 

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Quản lý Feedback</title>
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/manager-feedback.css" />
     <link
@@ -16,28 +16,21 @@
       <div class="container">
         <div class="logo">
           <a href="index.html">
-            //Thay đổi đường dẫn nếu cần <i class="fas fa-dna"></i>
+            <i class="fas fa-dna"></i>
             <span>Bloodline</span>
           </a>
         </div>
-
         <div class="header-right">
           <div class="search-bar">
             <input type="text" placeholder="Tìm kiếm..." />
             <button><i class="fas fa-search"></i></button>
           </div>
-
           <div class="notification">
             <i class="fas fa-bell"></i>
             <span class="badge">3</span>
           </div>
-
           <div class="user-menu">
-            <img
-              src="img/user-avatar.jpg"
-              alt="Ảnh đại diện người dùng"
-              class="avatar"
-            />
+            <img src="img/user-avatar.jpg" alt="Ảnh đại diện" class="avatar" />
             <div class="user-info">
               <span class="user-name"></span>
               <span class="user-role">Quản lý</span>
@@ -52,8 +45,8 @@
       <aside class="sidebar">
         <nav class="main-nav">
           <ul>
-            <li class="active">
-              <a href="dashboard.html">
+            <li>
+              <a href="manager-dashboard.html">
                 <i class="fas fa-tachometer-alt"></i>
                 <span>Bảng điều khiển</span>
               </a>
@@ -68,6 +61,12 @@
               <a href="results-manager.html">
                 <i class="fas fa-file-medical-alt"></i>
                 <span>Quản lý kết quả xét nghiệm</span>
+              </a>
+            </li>
+            <li class="active">
+              <a href="manager-feedback.html">
+                <i class="fas fa-comments"></i>
+                <span>Feedback</span>
               </a>
             </li>
             <li>
@@ -107,7 +106,7 @@
               </a>
             </li>
             <li class="logout">
-              <a href="#" id="logout-link">
+              <a href="../login/login.html">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Đăng xuất</span>
               </a>
@@ -118,15 +117,14 @@
 
       <div class="container-fee">
         <h2>Quản lý Feedback từ người dùng</h2>
-
         <div>
-          🔍
-          <input class="search"
+          <input
+            class="search"
             type="text"
             id="searchInput"
             placeholder="Tìm theo tên hoặc nội dung feedback..."
           />
-          <select  class="star-selected" id="starFilter">
+          <select class="star-selected" id="starFilter">
             <option value="">Tất cả</option>
             <option value="5">5 sao</option>
             <option value="4">4 sao</option>
@@ -148,10 +146,22 @@
             </tr>
           </thead>
           <tbody id="feedbackTable">
-            <!-- dữ liệu sẽ được hiển thị ở đây -->
           </tbody>
         </table>
       </div>
     </div>
+
+    <div id="replyModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3>Trả lời Feedback</h3>
+        <p id="feedbackContent"></p>
+        <textarea id="replyText" placeholder="Nhập phản hồi..."></textarea>
+        <button onclick="submitReply()">Gửi phản hồi</button>
+      </div>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/manager-feedback.js"></script>
   </body>
 </html>
