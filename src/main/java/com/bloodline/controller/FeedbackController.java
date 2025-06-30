@@ -9,28 +9,52 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/feedback")
-@CrossOrigin(origins = "*") // Cho phép frontend truy cập
+@CrossOrigin(origins = "*")
 public class FeedbackController {
+
     @Autowired
     private FeedbackRepository feedbackRepository;
 
-    // Lưu feedback
+    static class ReplyRequest {
+        private String reply;
+
+        public String getReply() {
+            return reply;
+        }
+
+        public void setReply(String reply) {
+            this.reply = reply;
+        }
+    }
+
     @PostMapping("/submit")
     public String submitFeedback(@RequestBody Feedback feedback) {
         feedbackRepository.save(feedback);
         return "Gửi đánh giá thành công!";
     }
 
-    // Lấy tất cả feedback (cho Manager)
     @GetMapping("/all")
     public List<Feedback> getAllFeedback() {
-        return feedbackRepository.findAll();
+        return feedbackRepository.findByReplyIsNull();
     }
 
-    // Xóa feedback
     @DeleteMapping("/delete/{id}")
     public String deleteFeedback(@PathVariable Long id) {
         feedbackRepository.deleteById(id);
         return "Xóa feedback thành công!";
+    }
+
+    @GetMapping("/user")
+    public List<Feedback> getFeedbackByUsername(@RequestParam("username") String username) {
+        return feedbackRepository.findByCustomerName(username);
+    }
+
+    @PostMapping("/reply/{id}")
+    public String replyToFeedback(@PathVariable("id") Long id, @RequestBody ReplyRequest request) {
+        Feedback feedback = feedbackRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Feedback không tồn tại"));
+        feedback.setReply(request.getReply());
+        feedbackRepository.save(feedback);
+        return "Phản hồi thành công!";
     }
 }
