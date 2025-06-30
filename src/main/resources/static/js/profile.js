@@ -97,7 +97,7 @@ if (form) {
       return;
     }
 
-    fetch("http://localhost:8080/api/change-password", {
+    fetch("http://localhost:8080/api/users/change-password", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
