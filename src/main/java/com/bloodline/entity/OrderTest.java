@@ -39,6 +39,11 @@ public class OrderTest {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "customer_name")
+    private String customerName;
+
+    @Column(name = "received_date")
+    private String receivedDate;
 
     // Getters & Setters
     public Long getId() {
@@ -73,14 +78,30 @@ public class OrderTest {
         this.recipientName = recipientName;
     }
 
-    public String getRecipientPhone() { return recipientPhone; }  
-    public void setRecipientPhone(String recipientPhone) { this.recipientPhone = recipientPhone; }
+    public String getRecipientPhone() {
+        return recipientPhone;
+    }
 
-    public String getRecipientAddress() { return recipientAddress; } 
-    public void setRecipientAddress(String recipientAddress) { this.recipientAddress = recipientAddress; }
+    public void setRecipientPhone(String recipientPhone) {
+        this.recipientPhone = recipientPhone;
+    }
 
-    public String getSelectedPackageLabel() { return selectedPackageLabel; } 
-    public void setSelectedPackageLabel(String selectedPackageLabel) { this.selectedPackageLabel = selectedPackageLabel; }
+    public String getRecipientAddress() {
+        return recipientAddress;
+    }
+
+    public void setRecipientAddress(String recipientAddress) {
+        this.recipientAddress = recipientAddress;
+    }
+
+    public String getSelectedPackageLabel() {
+        return selectedPackageLabel;
+    }
+
+    public void setSelectedPackageLabel(String selectedPackageLabel) {
+        this.selectedPackageLabel = selectedPackageLabel;
+    }
+
     public String getAppointmentDate() {
         return appointmentDate;
     }
@@ -105,13 +126,28 @@ public class OrderTest {
         this.sample = sample;
     }
 
-    
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getReceivedDate() {
+        return receivedDate;
+    }
+
+    public void setReceivedDate(String receivedDate) {
+        this.receivedDate = receivedDate;
     }
 
 }
