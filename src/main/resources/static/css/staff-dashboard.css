@@ -173,7 +173,7 @@
     border-left: 3px solid transparent;
 }
 
-.main-nav a:hover, 
+.main-nav a:hover,
 .main-nav li.active a {
     background-color: var(--light-color);
     color: var(--primary-color);
@@ -358,7 +358,7 @@
     width: 100vw;
     height: 100vh;
     background-color: #222431;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     /* z-index: 9999; */
@@ -438,21 +438,21 @@
     .dashboard-wrapper {
         flex-direction: column;
     }
-    
+
     .sidebar {
         width: 100%;
         height: auto;
         position: static;
     }
-    
+
     .dashboard-main {
         padding: 1rem;
     }
-    
+
     .stats-cards {
         grid-template-columns: 1fr;
     }
-    
+
     .search-bar input {
         width: 150px;
     }
