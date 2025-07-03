@@ -58,9 +58,16 @@ document.getElementById("save-status-btn").onclick = function () {
 
 // gọi API render lên bảng xét nghiệm
 document.addEventListener("DOMContentLoaded", function () {
-  const username = localStorage.getItem("username") || "NhanDam"; // đổi theo nhu cầu
+  const username =  localStorage.getItem("username") || "";
 
-  fetch(`http://localhost:8080/api/orders?username=${username}`)
+  let apiUrl = "http://localhost:8080/api/orders/all";
+  if (username) {
+    apiUrl += `?username=${encodeURIComponent(username)}`;
+  } else {
+    apiUrl += "/all";
+  }
+
+  fetch(apiUrl)
     .then((response) => {
       if (!response.ok) throw new Error("Không lấy được dữ liệu");
       return response.json();
@@ -77,17 +84,18 @@ function renderSpecimenTable(orders) {
     const row = document.createElement("tr");
 
     row.dataset.id = order.id || "";
-    row.dataset.name = order.customerName || order.username || "Ẩn danh";
-    row.dataset.date =
-      order.receivedDate || order.appointmentDate || "Chưa nhận";
-    row.dataset.status = order.status || "";
+    row.dataset.name = order.recipientName || ""; // Tên người nhận
+    row.dataset.date = order.appointmentDate || ""; // Ngày nhận
+    row.dataset.status = order.status || ""; // Trạng tháiSSSSS
     row.dataset.type = order.testType || "Chưa có thông tin";
 
     row.innerHTML = `
       <td>${order.id || "N/A"}</td>
       <td>${order.customerName || order.username || "Ẩn danh"}</td>
       <td>${order.receivedDate || order.appointmentDate || "Chưa nhận"}</td>
-      <td><span class="status ${getStatusClass(order.status)}">${order.status || "Không rõ"}</span></td>
+      <td><span class="status ${getStatusClass(order.status)}">${
+      order.status || "Không rõ"
+    }</span></td>
 
       <td>
         <button class="action-btn view-btn" title="Xem chi tiết"><i class="fas fa-eye"></i></button>
@@ -101,6 +109,7 @@ function renderSpecimenTable(orders) {
   attachEventHandlers();
 }
 
+// Sự kiện click xem thông tin mẫu xét nghiệm icon mắt
 function attachEventHandlers() {
   document.querySelectorAll(".view-btn").forEach((btn) => {
     btn.addEventListener("click", function () {
@@ -125,22 +134,19 @@ function attachEventHandlers() {
   });
 }
 
+// Xử lý cập nhật trạng thái
 document.getElementById("save-status-btn").onclick = function () {
   if (!currentTr) return;
 
   const newStatus = document.getElementById("status-select").value;
+  const orderId = currentTr.dataset.id;
 
-  const orderData = {
-    id: currentTr.dataset.id,
-    status: newStatus,
-  };
-
-  fetch(`http://localhost:8080/api/orders/${orderData.id}/sample`, {
+  fetch(`http://localhost:8080/api/orders/${orderId}/status`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ sample: "Mẫu mới cập nhật", status: newStatus }),
+    body: JSON.stringify({ status: newStatus }),
   })
     .then((res) => {
       if (!res.ok) throw new Error("Không cập nhật được mẫu");
@@ -160,6 +166,7 @@ document.getElementById("save-status-btn").onclick = function () {
     });
 };
 
+// Đóng modal khi click ra ngoài hoặc nút đóng
 document.getElementById("specimen-modal").onclick = function (e) {
   if (e.target === this) this.style.display = "none";
 };
@@ -173,6 +180,7 @@ document.querySelectorAll(".close-btn").forEach((btn) => {
   };
 });
 
+// Hàm đổi màu trạng thái
 function getStatusClass(status) {
   switch (status?.toLowerCase()) {
     case "đang xét nghiệm":
@@ -186,40 +194,41 @@ function getStatusClass(status) {
   }
 }
 
-document.getElementById("specimen-form").onsubmit = function (e) {
-  e.preventDefault();
+// Xử lý thêm mẫu mới
+// document.getElementById("specimen-form").onsubmit = function (e) {
+//   e.preventDefault();
 
-  const specimenData = {
-    code: document.getElementById("code").value,
-    username: document.getElementById("username").value,
-    testType: document.getElementById("testType").value,
-    appointmentDate: document.getElementById("appointmentDate").value,
-    appointmentTime: document.getElementById("appointmentTime").value,
-    recipientName: document.getElementById("recipientName").value,
-    recipientAddress: document.getElementById("recipientAddress").value,
-    recipientPhone: document.getElementById("recipientPhone").value,
-    selectedPackageLabel: document.getElementById("selectedPackageLabel").value,
-    customerName: document.getElementById("customerName").value,
-    receivedDate: document.getElementById("receivedDate").value,
-    status: document.getElementById("status").value,
-  };
+//   const specimenData = {
+//     code: document.getElementById("code").value,
+//     username: document.getElementById("username").value,
+//     testType: document.getElementById("testType").value,
+//     appointmentDate: document.getElementById("appointmentDate").value,
+//     appointmentTime: document.getElementById("appointmentTime").value,
+//     recipientName: document.getElementById("recipientName").value,
+//     recipientAddress: document.getElementById("recipientAddress").value,
+//     recipientPhone: document.getElementById("recipientPhone").value,
+//     selectedPackageLabel: document.getElementById("selectedPackageLabel").value,
+//     customerName: document.getElementById("customerName").value,
+//     receivedDate: document.getElementById("receivedDate").value,
+//     status: document.getElementById("status").value,
+//   };
 
-  fetch("http://localhost:8080/api/orders", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(specimenData),
-  })
-    .then((res) => {
-      if (!res.ok) throw new Error("Không thể thêm mẫu");
-      return res.json();
-    })
-    .then(() => {
-      alert("Thêm mẫu thành công!");
-      document.getElementById("specimen-form").reset();
-      location.reload();
-    })
-    .catch((err) => {
-      console.error("Lỗi thêm mẫu:", err);
-      alert("Gửi mẫu thất bại");
-    });
-};
+//   fetch("http://localhost:8080/api/orders", {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify(specimenData),
+//   })
+//     .then((res) => {
+//       if (!res.ok) throw new Error("Không thể thêm mẫu");
+//       return res.json();
+//     })
+//     .then(() => {
+//       alert("Thêm mẫu thành công!");
+//       document.getElementById("specimen-form").reset();
+//       location.reload();
+//     })
+//     .catch((err) => {
+//       console.error("Lỗi thêm mẫu:", err);
+//       alert("Gửi mẫu thất bại");
+//     });
+// };
