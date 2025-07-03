@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const selectedPriceLabel = selectedPriceRadio.closest("label").innerText.trim();
 
-    fetch("http://localhost:8080/api/appointments", {
+    fetch("http://localhost:8080/api/orders", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
