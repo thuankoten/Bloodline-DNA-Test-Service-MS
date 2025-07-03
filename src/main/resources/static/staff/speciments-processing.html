@@ -105,9 +105,9 @@
             </thead>
             <tbody>
               <tr>
-                <td>#MXN-001</td>
-                <td>Nguyễn Văn A</td>
-                <td>20/06/2025</td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td><span class="status processing">Đang xét nghiệm</span></td>
                 <td>
                   <button class="action-btn view-btn" title="Xem chi tiết">
@@ -122,9 +122,9 @@
                 </td>
               </tr>
               <tr>
-                <td>#MXN-004</td>
-                <td>Phạm Thị D</td>
-                <td>21/06/2025</td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td><span class="status processing">Đang xét nghiệm</span></td>
                 <td>
                   <button class="action-btn view-btn" title="Xem chi tiết">
@@ -138,11 +138,39 @@
                   </button>
                 </td>
               </tr>
-              
             </tbody>
           </table>
         </div>
       </main>
     </div>
+
+    <!-- Modal hiển thị chi tiết mẫu xét nghiệm -->
+    <div id="specimen-modal" class="modal" style="display: none">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Chi tiết mẫu</h2>
+        <p><strong>Mã mẫu:</strong> <span id="modal-id"></span></p>
+        <p><strong>Tên khách hàng:</strong> <span id="modal-name"></span></p>
+        <p><strong>Ngày nhận:</strong> <span id="modal-date"></span></p>
+        <p><strong>Trạng thái:</strong> <span id="modal-status"></span></p>
+        <p><strong>Loại xét nghiệm:</strong> <span id="modal-type"></span></p>
+      </div>
+    </div>
+
+    <!-- Modal cập nhật -->
+    <div id="update-modal" style="display: none">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <label for="status-select">Trạng thái:</label>
+        <select id="status-select">
+          <option>Đang xét nghiệm</option>
+          <option>Chờ kết quả</option>
+          <option>Đã hoàn thành</option>
+        </select>
+        <button id="save-status-btn">Lưu</button>
+      </div>
+    </div>
+
+    <script src="../js/speciments-processing.js"></script>
   </body>
 </html>
