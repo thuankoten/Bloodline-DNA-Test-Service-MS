@@ -23,22 +23,32 @@ public class OrderTestController {
         return orderTestRepository.findByUsername(username);
     }
 
-    @PutMapping("/{id}/sample")
-    public ResponseEntity<?> updateSample(@PathVariable(name = "id") Long id,
-            @RequestBody Map<String, String> body) {
-        Optional<OrderTest> optional = orderTestRepository.findById(id);
-        if (optional.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        String sample = body.get("sample");
-        String status = body.get("status"); // lấy status từ client gửi lên
+    @GetMapping("/all")
+    public List<OrderTest> getAllOrders() {
+        return orderTestRepository.findAll();
+    }
 
-        OrderTest order = optional.get();
-        order.setSample(sample);
-        if (status != null) {
-            order.setStatus(status);
-        }
-        
+    @PostMapping
+    public ResponseEntity<?> createOrder(@RequestBody OrderTest orderTest) {
+        OrderTest savedOrder = orderTestRepository.save(orderTest);
+        return ResponseEntity.ok(savedOrder);
+    }
+
+    @PutMapping("/{id}/status")
+public ResponseEntity<?> updateStatus(@PathVariable(name = "id") Long id,
+                                      @RequestBody Map<String, String> body) {
+    Optional<OrderTest> optional = orderTestRepository.findById(id);
+    if (optional.isEmpty()) {
+        return ResponseEntity.notFound().build();
+    }
+
+    String status = body.get("status");
+    if (status == null) {
+        return ResponseEntity.badRequest().body("Status không được để trống.");
+    }
+
+    OrderTest order = optional.get();
+    order.setStatus(status);
         orderTestRepository.save(order);
 
         return ResponseEntity.ok(order);
