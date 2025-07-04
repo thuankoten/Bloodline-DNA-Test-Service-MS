@@ -76,10 +76,19 @@ document.addEventListener("DOMContentLoaded", function () {
         const select = li.querySelector(".sample-type-select");
         const statusSpan = li.querySelector(".test-status");
 
+        // nếu mẫu đã được chọn trước đó thì hiển thị đúng và khóa lại 
         if (order.sample) {
-          select.value = order.sample;
-          select.disabled = true;
+          // gán mẫu đúng với giá trị trong select
+          const options = Array.from(select.options);
+          const match = options.find(opt => opt.value === order.sample);
+          if (match) {
+            select.value = match.value;
+            select.disabled = true;
+          }
+          // select.value = order.sample;
+          // select.disabled = true;
 
+          // Hiển thị trạng thái tương ứng từ order.status
           if (order.status === "0") {
             statusSpan.textContent = "Đang xét nghiệm";
             statusSpan.classList.add("waiting");
@@ -89,8 +98,12 @@ document.addEventListener("DOMContentLoaded", function () {
           } else if (order.status === "2") {
             statusSpan.textContent = "Chờ kết quả";
             statusSpan.classList.add("pending-result");
+          } else {
+            statusSpan.textContent = "Không rõ trạng thái";
+            statusSpan.classList.add("unknown")
           }
         } else {
+          // Nếu chưa chọn mẫu → cho phép chọn mẫu
           select.addEventListener("change", () => {
             const sample = select.value;
             const orderId = select.getAttribute("data-order-id");
@@ -111,10 +124,25 @@ document.addEventListener("DOMContentLoaded", function () {
                   if (!res.ok) throw new Error("Lỗi khi gửi mẫu");
                   return res.json();
                 })
-                .then(() => {
+                .then((updatedOrder) => {
                   select.disabled = true;
-                  statusSpan.textContent = "Đang chờ xét nghiệm";
-                  statusSpan.classList.add("waiting");
+                  // statusSpan.textContent = "Đang chờ xét nghiệm";
+                  // statusSpan.classList.add("waiting");
+
+                  // Sau khi chọn mẫu, gán trạng thái đúng từ phản hồi
+                  if (updatedOrder.status === "0") {
+                    statusSpan.textContent = "Đang xét nghiệm";
+                    statusSpan.classList.add("waiting");
+                  } else if (updatedOrder.status === "1") {
+                    statusSpan.textContent = "Đã hoàn tất";
+                    statusSpan.classList.add("done");
+                  } else if(updatedOrder.status === "2") {
+                    statusSpan.textContent = "Chờ kết quả";
+                    statusSpan.classList.add("pending-result");
+                  } else {
+                    statusSpan.textContent = "Đang chờ xét nghệm";
+                    statusSpan.classList.add("waiting");
+                  }
                 })
                 .catch((error) => {
                   console.error("Lỗi gửi mẫu:", error);
