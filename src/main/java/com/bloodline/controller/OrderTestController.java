@@ -51,8 +51,12 @@ public class OrderTestController {
 
         OrderTest order = optional.get();
         order.setSample(sample);
+        // gán trạng thái đang xét nghiệm sau khi chọn mẫu
+        if (order.getStatus() == null || order.getStatus().trim().isEmpty()) {
+            order.setStatus("0");
+        }
 
-        System.out.println("Saving order with new sample: " + sample);
+        System.out.println("Saving order with new sample: " + sample + " và status: 0");
 
         OrderTest updated = orderTestRepository.save(order);
         return ResponseEntity.ok(updated);
