@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -64,9 +64,7 @@
               </a>
             </li>
             <li>
-
               <a href="../staff/completed-speciments.html">
-
                 <i class="fas fa-vial"></i>
                 <span>Mẫu đã hoàn thành</span>
               </a>
@@ -144,124 +142,9 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>
-                    <span class="status processing"></span>
-                  </td>
-                  <td>
-                    <button class="action-btn view-btn" title="Xem chi tiết">
-                      <i class="fas fa-eye"></i>
-                    </button>
-                    <button
-                      class="action-btn update-btn"
-                      title="Cập nhật trạng thái"
-                    >
-                      <i class="fas fa-edit"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td><span class="status completed"></span></td>
-                  <td>
-                    <button class="action-btn view-btn" title="Xem chi tiết">
-                      <i class="fas fa-eye"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td><span class="status pending"></span></td>
-                  <td>
-                    <button class="action-btn view-btn" title="Xem chi tiết">
-                      <i class="fas fa-eye"></i>
-                    </button>
-                    <button
-                      class="action-btn update-btn"
-                      title="Cập nhật trạng thái"
-                    >
-                      <i class="fas fa-edit"></i>
-                    </button>
-                  </td>
-                </tr>
+                <!-- Nội dung sẽ được render từ JavaScript -->
               </tbody>
             </table>
-            <!-- <section class="add-specimen-form">
-              <h2>Thêm mẫu xét nghiệm mới</h2>
-              <form id="specimen-form">
-                <input
-                  type="text"
-                  id="code"
-                  placeholder="Mã mẫu (ví dụ: MXN-123)"
-                  required
-                />
-                <input
-                  type="text"
-                  id="username"
-                  placeholder="Username người tạo"
-                />
-                <input
-                  type="text"
-                  id="testType"
-                  placeholder="Loại xét nghiệm"
-                />
-                <input
-                  type="date"
-                  id="appointmentDate"
-                  placeholder="Ngày hẹn khám"
-                />
-                <input
-                  type="time"
-                  id="appointmentTime"
-                  placeholder="Giờ hẹn khám"
-                />
-                <input
-                  type="text"
-                  id="recipientName"
-                  placeholder="Tên người nhận kết quả"
-                />
-                <input
-                  type="text"
-                  id="recipientAddress"
-                  placeholder="Địa chỉ nhận"
-                />
-                <input
-                  type="text"
-                  id="recipientPhone"
-                  placeholder="SĐT người nhận"
-                />
-                <input
-                  type="text"
-                  id="selectedPackageLabel"
-                  placeholder="Tên gói dịch vụ"
-                />
-                <input
-                  type="text"
-                  id="customerName"
-                  placeholder="Tên khách hàng"
-                  required
-                />
-                <input
-                  type="date"
-                  id="receivedDate"
-                  placeholder="Ngày nhận mẫu"
-                  required
-                />
-                <select id="status">
-                  <option value="Đang xét nghiệm">Đang xét nghiệm</option>
-                  <option value="Chờ kết quả">Chờ kết quả</option>
-                  <option value="Đã hoàn thành">Đã hoàn thành</option>
-                </select>
-                <button type="submit">Thêm mẫu</button>
-              </form>
-            </section> -->
           </div>
         </section>
       </main>
@@ -287,17 +170,15 @@
         <h2>Cập nhật trạng thái mẫu</h2>
         <label for="status-select">Chọn trạng thái:</label>
         <select id="status-select">
-          <option value="Đang xét nghiệm">Đang xét nghiệm</option>
-          <option value="Chờ kết quả">Chờ kết quả</option>
-          <option value="Đã hoàn thành">Đã hoàn thành</option>
+          <option value="đang xét nghiệm">Đang xét nghiệm</option>
+          <option value="chờ kết quả">Chờ kết quả</option>
+          <option value="đã hoàn thành">Đã hoàn thành</option>
         </select>
         <br /><br />
         <button id="save-status-btn">Lưu</button>
       </div>
     </div>
 
-     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
-    <!-- <script src="../js/dashboard.js"></script> -->
     <script src="../js/staff-dashboard.js"></script>
   </body>
 </html>

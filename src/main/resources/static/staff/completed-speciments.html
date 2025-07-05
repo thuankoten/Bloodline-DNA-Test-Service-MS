@@ -32,11 +32,7 @@
           </div>
 
           <div class="user-menu">
-            <img
-              src="img/staff-avatar.jpg"
-              alt="Ảnh đại diện nhân viên"
-              class="avatar"
-            />
+            <img src="img/staff-avatar.jpg" alt="Avatar" class="avatar" />
             <div class="user-info">
               <span class="user-name">Nguyễn Văn A</span>
               <span class="user-role">Nhân viên y tế</span>
@@ -52,34 +48,29 @@
         <nav class="main-nav">
           <ul>
             <li>
-              <a href="./staff-dashboard.html">
-                <i class="fas fa-vial"></i>
-                <span>Mẫu xét nghiệm</span>
-              </a>
+              <a href="staff-dashboard.html"
+                ><i class="fas fa-vial"></i><span>Mẫu xét nghiệm</span></a
+              >
             </li>
             <li>
-              <a href="./speciments-processing.html">
-                <i class="fas fa-vial"></i>
-                <span>Mẫu đang xử lý</span>
-              </a>
+              <a href="speciments-processing.html"
+                ><i class="fas fa-vial"></i><span>Mẫu đang xử lý</span></a
+              >
             </li>
             <li class="active">
-              <a href="./completed-speciments.html">
-                <i class="fas fa-vial"></i>
-                <span>Mẫu đã hoàn thành</span>
-              </a>
+              <a href="completed-speciments.html"
+                ><i class="fas fa-vial"></i><span>Mẫu đã hoàn thành</span></a
+              >
             </li>
             <li>
-              <a href="./pending-speciments.html">
-                <i class="fas fa-vial"></i>
-                <span>Mẫu chờ kết quả</span>
-              </a>
+              <a href="pending-speciments.html"
+                ><i class="fas fa-vial"></i><span>Mẫu chờ kết quả</span></a
+              >
             </li>
             <li class="logout">
-              <a href="../login/login.html" id="logout-link">
-                <i class="fas fa-sign-out-alt"></i>
-                <span>Đăng xuất</span>
-              </a>
+              <a href="../login/login.html" id="logout-link"
+                ><i class="fas fa-sign-out-alt"></i><span>Đăng xuất</span></a
+              >
             </li>
           </ul>
         </nav>
@@ -87,9 +78,12 @@
 
       <main class="dashboard-main">
         <div class="page-header">
-          <h1>Mẫu đã hoàn thành</h1>
-          <p>Danh sách các mẫu xét nghiệm đã hoàn thành và có kết quả.</p>
+          <h1>Mẫu đang xử lý</h1>
+          <p>
+            Danh sách các mẫu xét nghiệm hiện đang được xử lý tại phòng lab.
+          </p>
         </div>
+
         <div class="table-responsive">
           <table class="data-table">
             <thead>
@@ -102,36 +96,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>#MXN-002</td>
-                <td>Trần Thị B</td>
-                <td>18/06/2025</td>
-                <td><span class="status completed">Đã hoàn thành</span></td>
-                <td>
-                  <button class="action-btn view-btn" title="Xem chi tiết">
-                    <i class="fas fa-eye"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>#MXN-005</td>
-                <td>Lê Văn C</td>
-                <td>19/06/2025</td>
-                <td><span class="status completed">Đã hoàn thành</span></td>
-                <td>
-                  <button class="action-btn view-btn" title="Xem chi tiết">
-                    <i class="fas fa-eye"></i>
-                  </button>
-                </td>
-              </tr>
-              
+              <!-- Dữ liệu render bằng JavaScript -->
             </tbody>
           </table>
         </div>
       </main>
     </div>
 
-    <!-- Modal hiển thị chi tiết mẫu xét nghiệm -->
+    <!-- Modal hiển thị chi tiết -->
     <div id="specimen-modal" class="modal" style="display: none">
       <div class="modal-content">
         <span class="close-btn">&times;</span>

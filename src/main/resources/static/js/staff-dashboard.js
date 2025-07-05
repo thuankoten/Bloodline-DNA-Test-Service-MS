@@ -1,70 +1,59 @@
-// Sự kiện click xem thông tin mẫu xét nghiệm icon mắt
-document.querySelectorAll(".view-btn").forEach((btn) => {
-  btn.addEventListener("click", function () {
-    // lấy dòng tr chứ nút click
-    const tr = btn.closest("tr");
-    // lấy tất cả các ô td trong dòng đó
-    const tds = tr.querySelectorAll("td");
+// Hàm đổi màu class trạng thái
+function getStatusClass(status) {
+  switch (status?.toLowerCase()) {
+    case "0":
+    case "đang xét nghiệm":
+      return "processing";
+    case "1":
+    case "chờ kết quả":
+      return "pending";
+    case "2":
+    case "đã hoàn thành":
+      return "completed";
+    default:
+      return "";
+  }
+}
 
-    // lấy thông tin data actribute(nếu có), nếu không lấy từ td
-    document.getElementById("modal-id").textContent =
-      tr.dataset.id || tds[0].textContent;
-    document.getElementById("modal-name").textContent =
-      tr.dataset.name || tds[1].textContent;
-    document.getElementById("modal-date").textContent =
-      tr.dataset.date || tds[2].textContent;
-    document.getElementById("modal-status").textContent =
-      tr.dataset.status || tds[3].textContent;
-    document.getElementById("modal-type").textContent =
-      tr.dataset.type || "Chưa có thông tin";
-    // hiển thị modal
-    document.getElementById("specimen-modal").style.display = "flex";
-  });
-});
+// Hàm hiển thị tiếng Việt từ mã trạng thái
+function getStatusLabel(status) {
+  switch (status?.toString()) {
+    case "0":
+      return "Đang xét nghiệm";
+    case "1":
+      return "Chờ kết quả";
+    case "2":
+      return "Đã hoàn thành";
+    default:
+      return "Không rõ";
+  }
+}
 
-// js điều chỉnh trạng thái mẫu xét nghiệm
+// Hàm chuyển tiếng Việt thành mã để gửi lên server
+function getStatusCode(label) {
+  switch (label?.toLowerCase()) {
+    case "đang xét nghiệm":
+      return "0";
+    case "chờ kết quả":
+      return "1";
+    case "đã hoàn thành":
+      return "2";
+    default:
+      return "";
+  }
+}
 
 let currentTr = null;
-// bắt đầu sự kiện click vào nút (cập nhật trạng thái)
-document.querySelectorAll(".update-btn").forEach((btn) => {
-  btn.addEventListener("click", function () {
-    // lưu trạng thía <tr> hiện tại để sau này cập nhật
-    currentTr = btn.closest("tr");
-    // Hiện modal cập nhật trạng thái
-    document.getElementById("update-modal").style.display = "flex";
-    // lấy trạng thái hiện tại từ <span classs="status"> trong dòng đó
-    const currentStatus = currentTr.querySelector(".status").innerText.trim();
-    // đặt trạng thái hiện tại vào dropdown select
-    document.getElementById("status-select").value = currentStatus;
-  });
-});
 
-// 2. Khi bấm nút "lưu" trong modal cập nhật trạng thái
-document.getElementById("save-status-btn").onclick = function () {
-  if (currentTr) {
-    // lấy trạng thái mới từ dropdown
-    const newStatus = document.getElementById("status-select").value;
-    // cập nhật nội dung trạng thái trong bảng span
-    const statusSpan = currentTr.querySelector(".status");
-    statusSpan.innerText = newStatus;
-    // cập nhật class cho trạng thái để đổi màu sắc nếu có
-    statusSpan.className = "status " + getStatusClass(newStatus);
-    // cập nhật lại data-status trên <tr>
-    currentTr.dataset.status = newStatus;
-    // đóng modal
-    document.getElementById("update-modal").style.display = "none";
-  }
-};
-
-// gọi API render lên bảng xét nghiệm
+// Gọi API và render bảng
 document.addEventListener("DOMContentLoaded", function () {
-  const username =  localStorage.getItem("username") || "";
+  const username = localStorage.getItem("username") || "";
 
   let apiUrl = "http://localhost:8080/api/orders/all";
   if (username) {
-    apiUrl += `?username=${encodeURIComponent(username)}`;
-  } else {
-    apiUrl += "/all";
+    apiUrl = `http://localhost:8080/api/orders?username=${encodeURIComponent(
+      username
+    )}`;
   }
 
   fetch(apiUrl)
@@ -76,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((error) => console.error("Lỗi khi tải dữ liệu", error));
 });
 
+// Hàm render bảng mẫu xét nghiệm
 function renderSpecimenTable(orders) {
   const tableBody = document.querySelector("table.data-table tbody");
   tableBody.innerHTML = "";
@@ -84,19 +74,18 @@ function renderSpecimenTable(orders) {
     const row = document.createElement("tr");
 
     row.dataset.id = order.id || "";
-    row.dataset.name = order.recipientName || ""; // Tên người nhận
-    row.dataset.date = order.appointmentDate || ""; // Ngày nhận
-    row.dataset.status = order.status || ""; // Trạng tháiSSSSS
+    row.dataset.name = order.recipientName || "";
+    row.dataset.date = order.appointmentDate || "";
+    row.dataset.status = getStatusLabel(order.status);
     row.dataset.type = order.testType || "Chưa có thông tin";
 
     row.innerHTML = `
       <td>${order.id || "N/A"}</td>
       <td>${order.customerName || order.username || "Ẩn danh"}</td>
       <td>${order.receivedDate || order.appointmentDate || "Chưa nhận"}</td>
-      <td><span class="status ${getStatusClass(order.status)}">${
-      order.status || "Không rõ"
-    }</span></td>
-
+      <td><span class="status ${getStatusClass(order.status)}">${getStatusLabel(
+      order.status
+    )}</span></td>
       <td>
         <button class="action-btn view-btn" title="Xem chi tiết"><i class="fas fa-eye"></i></button>
         <button class="action-btn update-btn" title="Cập nhật trạng thái"><i class="fas fa-edit"></i></button>
@@ -109,21 +98,30 @@ function renderSpecimenTable(orders) {
   attachEventHandlers();
 }
 
-// Sự kiện click xem thông tin mẫu xét nghiệm icon mắt
+// Hàm gắn lại các sự kiện sau khi render bảng
 function attachEventHandlers() {
+  // Sự kiện click xem thông tin mẫu xét nghiệm icon mắt
   document.querySelectorAll(".view-btn").forEach((btn) => {
     btn.addEventListener("click", function () {
       const tr = btn.closest("tr");
-      document.getElementById("modal-id").textContent = tr.dataset.id;
-      document.getElementById("modal-name").textContent = tr.dataset.name;
-      document.getElementById("modal-date").textContent = tr.dataset.date;
-      document.getElementById("modal-status").textContent = tr.dataset.status;
+      const tds = tr.querySelectorAll("td");
+
+      document.getElementById("modal-id").textContent =
+        tr.dataset.id || tds[0].textContent;
+      document.getElementById("modal-name").textContent =
+        tr.dataset.name || tds[1].textContent;
+      document.getElementById("modal-date").textContent =
+        tr.dataset.date || tds[2].textContent;
+      document.getElementById("modal-status").textContent =
+        tr.dataset.status || tds[3].textContent;
       document.getElementById("modal-type").textContent =
         tr.dataset.type || "Chưa có thông tin";
+
       document.getElementById("specimen-modal").style.display = "flex";
     });
   });
 
+  // Sự kiện cập nhật trạng thái
   document.querySelectorAll(".update-btn").forEach((btn) => {
     btn.addEventListener("click", function () {
       currentTr = btn.closest("tr");
@@ -134,11 +132,12 @@ function attachEventHandlers() {
   });
 }
 
-// Xử lý cập nhật trạng thái
+// Sự kiện lưu trạng thái mới khi bấm nút "Lưu"
 document.getElementById("save-status-btn").onclick = function () {
   if (!currentTr) return;
 
-  const newStatus = document.getElementById("status-select").value;
+  const newLabel = document.getElementById("status-select").value;
+  const newStatusCode = getStatusCode(newLabel);
   const orderId = currentTr.dataset.id;
 
   fetch(`http://localhost:8080/api/orders/${orderId}/status`, {
@@ -146,7 +145,7 @@ document.getElementById("save-status-btn").onclick = function () {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ status: newStatus }),
+    body: JSON.stringify({ status: newStatusCode }),
   })
     .then((res) => {
       if (!res.ok) throw new Error("Không cập nhật được mẫu");
@@ -154,9 +153,12 @@ document.getElementById("save-status-btn").onclick = function () {
     })
     .then((updatedOrder) => {
       const statusSpan = currentTr.querySelector(".status");
-      statusSpan.innerText = updatedOrder.status;
+      const newLabel = getStatusLabel(updatedOrder.status);
+
+      statusSpan.innerText = newLabel;
       statusSpan.className = "status " + getStatusClass(updatedOrder.status);
-      currentTr.dataset.status = updatedOrder.status;
+      currentTr.dataset.status = newLabel;
+
       document.getElementById("update-modal").style.display = "none";
       alert("✔️ Đã cập nhật trạng thái");
     })
@@ -166,69 +168,18 @@ document.getElementById("save-status-btn").onclick = function () {
     });
 };
 
-// Đóng modal khi click ra ngoài hoặc nút đóng
+// Đóng modal khi click ra ngoài
 document.getElementById("specimen-modal").onclick = function (e) {
   if (e.target === this) this.style.display = "none";
 };
 document.getElementById("update-modal").onclick = function (e) {
   if (e.target === this) this.style.display = "none";
 };
+
+// Nút đóng modal
 document.querySelectorAll(".close-btn").forEach((btn) => {
   btn.onclick = function () {
     document.getElementById("specimen-modal").style.display = "none";
     document.getElementById("update-modal").style.display = "none";
   };
 });
-
-// Hàm đổi màu trạng thái
-function getStatusClass(status) {
-  switch (status?.toLowerCase()) {
-    case "đang xét nghiệm":
-      return "processing";
-    case "đã hoàn thành":
-      return "completed";
-    case "chờ kết quả":
-      return "pending";
-    default:
-      return "";
-  }
-}
-
-// Xử lý thêm mẫu mới
-// document.getElementById("specimen-form").onsubmit = function (e) {
-//   e.preventDefault();
-
-//   const specimenData = {
-//     code: document.getElementById("code").value,
-//     username: document.getElementById("username").value,
-//     testType: document.getElementById("testType").value,
-//     appointmentDate: document.getElementById("appointmentDate").value,
-//     appointmentTime: document.getElementById("appointmentTime").value,
-//     recipientName: document.getElementById("recipientName").value,
-//     recipientAddress: document.getElementById("recipientAddress").value,
-//     recipientPhone: document.getElementById("recipientPhone").value,
-//     selectedPackageLabel: document.getElementById("selectedPackageLabel").value,
-//     customerName: document.getElementById("customerName").value,
-//     receivedDate: document.getElementById("receivedDate").value,
-//     status: document.getElementById("status").value,
-//   };
-
-//   fetch("http://localhost:8080/api/orders", {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(specimenData),
-//   })
-//     .then((res) => {
-//       if (!res.ok) throw new Error("Không thể thêm mẫu");
-//       return res.json();
-//     })
-//     .then(() => {
-//       alert("Thêm mẫu thành công!");
-//       document.getElementById("specimen-form").reset();
-//       location.reload();
-//     })
-//     .catch((err) => {
-//       console.error("Lỗi thêm mẫu:", err);
-//       alert("Gửi mẫu thất bại");
-//     });
-// };
