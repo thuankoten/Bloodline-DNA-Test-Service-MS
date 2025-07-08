@@ -1,29 +1,90 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Quản lý kết quả xét nghiệm</title>
-  <link rel="stylesheet" href="../css/admin-results.css">
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/admin.css" />
+  <link rel="stylesheet" href="../css/report.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 </head>
-<body>
-  <div class="admin-container">
-    <h1>DANH SÁCH KẾT QUẢ XÉT NGHIỆM</h1>
+<body class="admin-page">
+  <!-- Header -->
+  <header class="admin-header">
+    <div class="container">
+      <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="logo">
+        <a>
+          <i class="fas fa-dna"></i> <span>Bloodline</span>
+        </a>
+        <span class="admin-badge">Bảng điều khiển quản trị</span>
+      </div>
+      <div class="header-right">
+        <div class="search-bar">
+          <input type="text" placeholder="Tìm kiếm..." />
+          <button><i class="fas fa-search"></i></button>
+        </div>
+        <div class="user-menu">
+          <img src="img/admin-avatar.jpg" alt="Ảnh đại diện quản trị viên" class="avatar" />
+          <div class="user-info">
+            <span class="user-name">Người dùng quản trị</span>
+            <span class="user-role">Quản trị viên hệ thống</span>
+          </div>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+    </div>
+  </header>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Mã Xét Nghiệm</th>
-          <th>Họ Tên</th>
-          <th>Loại Xét Nghiệm</th>
-          <th>Ngày Xét Nghiệm</th>
-          <th>Chi Tiết</th>
-        </tr>
-      </thead>
-      <tbody id="resultsBody">
-        <!-- Dữ liệu sẽ được render bằng JS -->
-      </tbody>
-    </table>
+  <div class="admin-wrapper">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <nav class="admin-nav">
+        <ul>
+          <li><a href="admin-reports.html"><i class="fas fa-chart-bar"></i> Báo cáo & Phân tích</a></li>
+          <li class="active"><a href="admin-results.html"><i class="fas fa-file-medical-alt"></i> Kết quả xét nghiệm</a></li>
+        </ul>
+        <ul class="logout">
+          <li><a href="../login/login.html" style="color:#e74c3c"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="admin-main">
+      <div class="container">
+        <h1>DANH SÁCH KẾT QUẢ XÉT NGHIỆM</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Mã Xét Nghiệm</th>
+              <th>Họ Tên</th>
+              <th>Loại Xét Nghiệm</th>
+              <th>Ngày Xét Nghiệm</th>
+              <th>Chi Tiết</th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody">
+            <!-- Dữ liệu sẽ được render bằng JS -->
+          </tbody>
+        </table>
+      </div>
+    </main>
   </div>
+
+  <!-- Footer -->
+  <footer class="admin-footer">
+    <div class="container">
+      <p>&copy; 2023 Dịch vụ xét nghiệm DNA Bloodline. Bảo lưu mọi quyền.</p>
+      <ul class="footer-links">
+        <li><a href="admin-help.html">Trợ giúp quản trị</a></li>
+        <li><a href="admin-documentation.html">Tài liệu</a></li>
+        <li><a href="contact-support.html">Hỗ trợ</a></li>
+      </ul>
+    </div>
+  </footer>
 
   <script src="../js/admin-results.js"></script>
 </body>
