@@ -230,19 +230,19 @@ function initLoginForm() {
             showAuthMessage("Đăng nhập thành công!", "success");
 
             setTimeout(() => {
-              let redirectPage = "/customer/dashboard.html";
+              let redirectPage = "/customer/order-test.html";
               switch (data.user.role) {
                 case "admin":
-                  redirectPage = "/admin/admin-dashboard.html";
+                  redirectPage = "/admin/admin-reports.html";
                   break;
                 case "staff":
                   redirectPage = "/staff/staff-dashboard.html";
                   break;
                 case "manager":
-                  redirectPage = "/manager/manager-dashboard.html";
+                  redirectPage = "/manager/customer-profile.html";
                   break;
                 default:
-                  redirectPage = "/customer/dashboard.html";
+                  redirectPage = "/customer/order-test.html";
               }
 
               console.log("Chuyển hướng đến:", redirectPage);
