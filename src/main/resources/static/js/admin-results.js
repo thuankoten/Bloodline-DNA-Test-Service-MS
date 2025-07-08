@@ -11,14 +11,18 @@ function loadResults() {
           <td>${result.username}</td>
           <td>${result.testType || ''}</td>
           <td>${result.appointmentDate || ''}</td>
-          <td><button onclick="viewDetail('${result.id}')">Xem</button></td>
+          <td>
+            <button onclick="viewDetail('${result.id}')" title="Xem chi tiết">
+              <i class="fas fa-eye"></i>
+            </button>
+          </td>
         `;
         tbody.appendChild(tr);
       });
     })
     .catch(error => {
       console.error('Lỗi khi tải dữ liệu:', error);
-    });s
+    });
 }
 
 function viewDetail(id) {
