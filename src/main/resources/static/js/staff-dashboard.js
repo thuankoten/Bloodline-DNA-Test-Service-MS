@@ -183,3 +183,23 @@ document.querySelectorAll(".close-btn").forEach((btn) => {
     document.getElementById("update-modal").style.display = "none";
   };
 });
+
+document.querySelectorAll('.stat-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const url = card.dataset.href;
+    if (url) {
+      window.location.href = url;
+    }
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  fetch("http://localhost:8080/api/orders/stats")
+    .then(res => res.json())
+    .then(data => {
+      document.querySelector('.stat-card[data-href="speciments-processing.html"] h3').textContent = data.processing;
+      document.querySelector('.stat-card[data-href="pending-speciments.html"] h3').textContent = data.pending;
+      document.querySelector('.stat-card[data-href="completed-speciments.html"] h3').textContent = data.completed;
+    })
+    .catch(err => console.error("Lỗi tải thống kê:", err));
+});
