@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     alert('Không tìm thấy thông tin đăng nhập!');
     return;
   }
-  fetch(`/api/user-order-tests/by-username/${encodeURIComponent(username)}`)
+  fetch(`http://localhost:8080/api/orders?username=${username}`)
     .then(response => response.json())
     .then(data => renderResultsTable(data))
     .catch(error => {
@@ -36,8 +36,8 @@ function renderResultsTable(results) {
     }
     const row = document.createElement('tr');
     row.innerHTML = `
-      <td>${item.recipient_name || ''}</td>
-      <td>${item.test_type || ''}</td>
+      <td>${item.recipientName || ''}</td>
+      <td>${item.testType || ''}</td>
       <td>${item.sample || ''}</td>
       <td>${statusText}</td>
       <td>
