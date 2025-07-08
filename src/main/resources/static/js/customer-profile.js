@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
       sessionStorage.removeItem("loggedInUsername");
       console.log("Username đã bị xóa khỏi sessionStorage.");
-      window.location.href = "index.html";
+      window.location.href = "../login/login.html";
     });
   }
 
