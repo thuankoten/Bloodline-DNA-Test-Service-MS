@@ -45,6 +45,9 @@ public class OrderTest {
     @Column(name = "received_date")
     private String receivedDate;
 
+    @Column(name = "conclusion", columnDefinition = "TEXT")
+    private String conclusion;
+
     // Getters & Setters
     public Long getId() {
         return id;
@@ -150,4 +153,11 @@ public class OrderTest {
         this.receivedDate = receivedDate;
     }
 
+    public String getConclusion() {
+        return conclusion;
+    }
+
+    public void setConclusion(String conclusion) {
+        this.conclusion = conclusion;
+    }
 }

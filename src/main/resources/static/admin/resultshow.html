@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Kết quả xét nghiệm ADN</title>
+  <link rel="stylesheet" href="../css/resultshow.css">
+</head>
+<body>
+  <div class="report-container">
+    <button onclick="window.history.back()" class="back-btn">← Quay lại</button>
+    <h2>KẾT QUẢ XÉT NGHIỆM ADN</h2>
+
+    <p><strong>Mã xét nghiệm:</strong> <span id="id"></span></p>
+    <p><strong>Họ và tên người xét nghiệm:</strong> <span id="username"></span></p>
+    <p><strong>Ngày xét nghiệm:</strong> <span id="appointmentdate"></span></p>
+    <p><strong>Loại xét nghiệm:</strong> <span id="testtype"></span></p>
+
+
+    <div class="conclusion-box">
+      <h3 style="display: block; width: 100%; margin-bottom: 8px;">Kết quả & Kết luận</h3>
+      <p id="conclusion"><!-- Nội dung sẽ được chèn bằng JS, xử lý xuống hàng khi có 'Kết luận:' --></p>
+    </div>
+
+    <p class="footer">
+      Trung tâm Xét nghiệm ADN Bloodline - Hotline: 0909 999 888
+    </p>
+  </div>
+  <script src="../js/resultshow.js"></script>
+</body>
+</html>

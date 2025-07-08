@@ -1,14 +1,24 @@
 package com.bloodline.controller;
 
-import com.bloodline.entity.OrderTest;
-import com.bloodline.repository.OrderTestRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.bloodline.entity.OrderTest;
+import com.bloodline.repository.OrderTestRepository;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -80,6 +90,58 @@ public class OrderTestController {
         orderTestRepository.save(order);
 
         return ResponseEntity.ok(order);
+    }
+
+    @PostMapping("/conclusion")
+    public ResponseEntity<?> saveConclusion(@RequestBody Map<String, String> payload) {
+        System.out.println("[DEBUG] Payload nhận được: " + payload);
+        try {
+            if (!payload.containsKey("id") || !payload.containsKey("conclusion")) {
+                return ResponseEntity.badRequest().body("Thiếu id hoặc kết luận.");
+            }
+            Long id;
+            try {
+                id = Long.parseLong(payload.get("id"));
+            } catch (NumberFormatException nfe) {
+                System.out.println("[ERROR] id không hợp lệ: " + payload.get("id"));
+                return ResponseEntity.badRequest().body("id không hợp lệ.");
+            }
+            String conclusion = payload.get("conclusion");
+            Optional<OrderTest> optionalOrder = orderTestRepository.findById(id);
+            if (optionalOrder.isPresent()) {
+                OrderTest order = optionalOrder.get();
+                order.setConclusion(conclusion);
+                orderTestRepository.save(order);
+                return ResponseEntity.ok("Kết luận đã được lưu.");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Không tìm thấy mẫu.");
+            }
+        } catch (Exception e) {
+            System.out.println("[ERROR] Exception khi lưu kết luận: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi xử lý dữ liệu.");
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getOrderById(@PathVariable("id") Long id) {
+        Optional<OrderTest> optional = orderTestRepository.findById(id);
+        if (optional.isPresent()) {
+            OrderTest order = optional.get();
+            // Đảm bảo trả về đúng tên trường test_type (snake_case) cho frontend
+            Map<String, Object> result = new java.util.HashMap<>();
+            result.put("id", order.getId());
+            result.put("username", order.getUsername());
+            result.put("customerName", order.getCustomerName());
+            result.put("appointmentDate", order.getAppointmentDate());
+            result.put("receivedDate", order.getReceivedDate());
+            result.put("conclusion", order.getConclusion());
+            result.put("test_type", order.getTestType());
+            // Thêm các trường khác nếu cần
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Không tìm thấy kết quả.");
+        }
     }
 
 }

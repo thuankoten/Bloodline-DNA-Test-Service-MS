@@ -1,5 +1,6 @@
 // Biến dùng để lưu tr của dòng đang xem
 let currentTr = null;
+let currentSpecimenId = null;
 
 document.addEventListener("DOMContentLoaded", function () {
   const username = localStorage.getItem("username") || "";
@@ -54,18 +55,21 @@ function renderSpecimenTable(orders) {
     row.dataset.type = order.testType || "Chưa có thông tin";
 
     row.innerHTML = `
-      <td>${order.id || "N/A"}</td>
-      <td>${order.customerName || order.username || "Ẩn danh"}</td>
-      <td>${order.receivedDate || order.appointmentDate || "Chưa nhận"}</td>
-      <td><span class="status ${getStatusClass(order.status)}">${mapStatusText(
-      order.status
-    )}</span></td>
-      <td>
-        <button class="action-btn view-btn" title="Xem chi tiết">
-          <i class="fas fa-eye"></i>
-        </button>
-      </td>
-    `;
+  <td>${order.id || "N/A"}</td>
+  <td>${order.customerName || order.username || "Ẩn danh"}</td>
+  <td>${order.receivedDate || order.appointmentDate || "Chưa nhận"}</td>
+  <td><span class="status ${getStatusClass(order.status)}">${mapStatusText(
+    order.status
+  )}</span></td>
+  <td>
+    <button class="action-btn view-btn" title="Xem chi tiết">
+      <i class="fas fa-eye"></i>
+    </button>
+    <button class="action-btn btn-conclusion" title="Nhập kết luận" data-id="${order.id}">
+      <i class="fas fa-pen"></i>
+    </button>
+  </td>
+`;
 
     tableBody.appendChild(row);
   });
@@ -183,4 +187,46 @@ document.addEventListener("click", function (e) {
         alert("Lỗi khi cập nhật trạng thái.");
       });
   }
+
+  // Sự kiện click icon bút
+  if (e.target.closest('.btn-conclusion')) {
+    currentSpecimenId = e.target.closest('.btn-conclusion').dataset.id;
+    document.getElementById('conclusion-modal').style.display = 'block';
+  }
 });
+
+// Đóng modal
+document.getElementById('close-conclusion').onclick = function() {
+  document.getElementById('conclusion-modal').style.display = 'none';
+  document.getElementById('conclusion-text').value = '';
+};
+
+document.getElementById('save-conclusion-btn').onclick = function() {
+  const conclusion = document.getElementById('conclusion-text').value;
+  if (!conclusion.trim()) {
+    alert('Vui lòng nhập kết luận!');
+    return;
+  }
+
+  // Gửi API lưu kết luận đúng endpoint
+  fetch(`http://localhost:8080/api/orders/conclusion`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ id: currentSpecimenId, conclusion: conclusion })
+  })
+  .then(res => {
+    if (!res.ok) throw new Error("Không thể lưu kết luận");
+    return res.text();
+  })
+  .then(data => {
+    alert('✅ ' + data);
+    document.getElementById('conclusion-modal').style.display = 'none';
+    document.getElementById('conclusion-text').value = '';
+    location.reload(); // Refresh lại bảng nếu cần
+  })
+  .catch((err) => {
+    console.error(err);
+    alert('❌ Lỗi khi lưu kết luận!');
+  });
+};
+
