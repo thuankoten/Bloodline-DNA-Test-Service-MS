@@ -1,16 +1,34 @@
 let selectedRating = 0;
 
-document.querySelectorAll(".star").forEach((star) => {
+const stars = document.querySelectorAll(".star");
+
+stars.forEach((star) => {
+  const value = parseInt(star.getAttribute("data-value"));
+
   star.addEventListener("click", function () {
-    selectedRating = parseInt(this.getAttribute("data-value"));
-    document
-      .querySelectorAll(".star")
-      .forEach((s) => s.classList.remove("selected"));
-    for (let i = 0; i < selectedRating; i++) {
-      document.querySelectorAll(".star")[i].classList.add("selected");
-    }
+    selectedRating = value;
+    updateStars(selectedRating);
+  });
+
+  star.addEventListener("mouseover", function () {
+    updateStars(value);
+  });
+
+  star.addEventListener("mouseout", function () {
+    updateStars(selectedRating);
   });
 });
+
+function updateStars(value) {
+  stars.forEach((s) => {
+    const starValue = parseInt(s.getAttribute("data-value"));
+    if (starValue <= value) {
+      s.classList.add("selected");
+    } else {
+      s.classList.remove("selected");
+    }
+  });
+}
 
 function submitFeedback() {
   const feedback = document.getElementById("feedback").value.trim();
@@ -36,10 +54,8 @@ function submitFeedback() {
       alert(msg);
       document.getElementById("feedback").value = "";
       selectedRating = 0;
-      document
-        .querySelectorAll(".star")
-        .forEach((s) => s.classList.remove("selected"));
-      loadUserFeedbacks(); // reload bảng
+      updateStars(0); 
+      loadUserFeedbacks(); 
     });
 }
 

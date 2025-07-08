@@ -21,7 +21,7 @@
   color: #007bff;
   margin: 30px auto 25px;
   font-weight: 700;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   position: relative;
   display: inline-block;
 }
@@ -38,19 +38,12 @@
 
 .stars {
   display: flex;
-  flex-direction: row-reverse; /* quan trọng */
+  flex-direction: row;
   justify-content: center;
   gap: 8px;
   margin: 15px 0;
 }
 
-/* Hover từ trái sang phải */
-.star:hover,
-.star:hover ~ .star {
-  color: orange;
-}
-
-/* Reset nếu chưa hover */
 .star {
   font-size: 30px;
   cursor: pointer;
@@ -62,6 +55,9 @@
   color: orange;
 }
 
+.star.hovered {
+  color: orange;
+}
 
 textarea {
   width: 100%;
@@ -76,7 +72,7 @@ textarea {
   outline: none;
   background: #fff;
   color: #333;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 textarea::placeholder {
@@ -121,7 +117,7 @@ button:hover {
 .user-feedback-table td {
   padding: 12px 15px;
   border: 1px solid #ccc;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .user-feedback-table th {
