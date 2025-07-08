@@ -9,8 +9,8 @@ function loadResults() {
         tr.innerHTML = `
           <td>${result.id}</td>
           <td>${result.username}</td>
-          <td>${result.test_type || ''}</td>
-          <td>${result.appointment_date || ''}</td>
+          <td>${result.testType || ''}</td>
+          <td>${result.appointmentDate || ''}</td>
           <td>
             <button onclick="viewDetail('${result.id}')" title="Xem chi tiết">
               <i class="fas fa-eye"></i>
