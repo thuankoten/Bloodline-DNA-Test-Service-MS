@@ -15,7 +15,7 @@
     <header class="dashboard-header">
       <div class="container">
         <div class="logo">
-          <a href="staff-dashboard.html">
+          <a>
             <i class="fas fa-dna"></i> <span>Bloodline - Staff</span>
           </a>
         </div>
@@ -26,10 +26,6 @@
             <button><i class="fas fa-search"></i></button>
           </div>
 
-          <div class="notification">
-            <i class="fas fa-bell"></i>
-            <span class="badge">3</span>
-          </div>
 
           <div class="user-menu">
             <img
@@ -38,7 +34,7 @@
               class="avatar"
             />
             <div class="user-info">
-              <span class="user-name">Nguyễn Văn A</span>
+              <span class="user-name">Staff</span>
               <span class="user-role">Nhân viên y tế</span>
             </div>
             <i class="fas fa-chevron-down"></i>
@@ -64,19 +60,19 @@
               </a>
             </li>
             <li>
-              <a href="../staff/completed-speciments.html">
-                <i class="fas fa-vial"></i>
-                <span>Mẫu đã hoàn thành</span>
-              </a>
-            </li>
-            <li>
               <a href="../staff/pending-speciments.html">
                 <i class="fas fa-vial"></i>
                 <span>Mẫu chờ kết quả</span>
               </a>
             </li>
+            <li>
+              <a href="../staff/completed-speciments.html">
+                <i class="fas fa-vial"></i>
+                <span>Mẫu đã hoàn thành</span>
+              </a>
+            </li>
             <li class="logout">
-              <a href="../login.html" id="logout-link">
+              <a href="../login/login.html" id="logout-link">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Đăng xuất</span>
               </a>
@@ -89,47 +85,29 @@
         <div class="page-header">
           <h1>Bảng điều khiển nhân viên</h1>
           <p>
-            Chào mừng trở lại, <span id="welcome-user-name"></span>! Dưới đây là
-            tổng quan về các mẫu xét nghiệm bạn đang quản lý.
+            Chào mừng trở lại, <span id="welcome-user-name"></span>! Dưới đây là tổng quan về các mẫu xét nghiệm bạn đang quản lý.
           </p>
         </div>
 
         <div class="stats-cards">
-          <div class="stat-card">
-            <div class="stat-icon">
-              <i class="fas fa-vial"></i>
-            </div>
-            <div class="stat-details">
-              <h3>5</h3>
-              <p>Mẫu đang xử lý</p>
-            </div>
+          <div class="stat-card" data-href="speciments-processing.html">
+            <div class="stat-icon"><i class="fas fa-vial"></i></div>
+            <div class="stat-details"><h3></h3><p>Mẫu đang xử lý</p></div>
           </div>
-          <div class="stat-card">
-            <div class="stat-icon">
-              <i class="fas fa-check-circle"></i>
-            </div>
-            <div class="stat-details">
-              <h3>12</h3>
-              <p>Mẫu đã hoàn thành</p>
-            </div>
+          <div class="stat-card" data-href="pending-speciments.html">
+            <div class="stat-icon"><i class="fas fa-clock"></i></div>
+            <div class="stat-details"><h3></h3><p>Mẫu chờ kết quả</p></div>
           </div>
-          <div class="stat-card">
-            <div class="stat-icon">
-              <i class="fas fa-clock"></i>
-            </div>
-            <div class="stat-details">
-              <h3>3</h3>
-              <p>Mẫu chờ kết quả</p>
-            </div>
+          <div class="stat-card" data-href="completed-speciments.html">
+            <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+            <div class="stat-details"><h3></h3><p>Mẫu đã hoàn thành</p></div>
           </div>
+          
         </div>
 
-        <section class="specimens-overview">
-          <div class="section-header">
-            <h2>Danh sách mẫu xét nghiệm gần đây</h2>
-            <a href="specimens.html" class="view-all">Xem tất cả</a>
-          </div>
 
+        <section class="specimens-overview">
+          
           <div class="table-responsive">
             <table class="data-table">
               <thead>
