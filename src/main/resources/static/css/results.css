@@ -1,0 +1,121 @@
+.results-table-wrapper {
+  overflow-x: auto;
+  margin-top: 24px;
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.results-table th, .results-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: left;
+  font-size: 15px;
+}
+
+.results-table th {
+  background: #f5f7fa;
+  font-weight: 600;
+  color: #2d3a4a;
+}
+
+.results-table tr:last-child td {
+  border-bottom: none;
+}
+
+.results-table tbody tr:hover {
+  background: #f0f7ff;
+  transition: background 0.2s;
+}
+
+@media (max-width: 900px) {
+  .results-table th, .results-table td {
+    font-size: 13px;
+    padding: 8px 6px;
+  }
+}
+
+/* Modal overlay */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.04);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal content */
+.modal-content {
+  background: #fff;
+  border-radius: 10px;
+  padding: 30px 40px 20px 40px;
+  width: 700px;
+  max-width: 95vw;
+  margin: 40px auto;
+  box-shadow: 0 0 15px rgba(0,0,0,0.15);
+  position: relative;
+  font-family: Arial, sans-serif;
+  text-align: left;
+}
+
+.close-modal {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+}
+
+.modal-content h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 32px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.modal-content p {
+  font-size: 1.15rem;
+  margin: 12px 0 0 0;
+}
+
+.modal-content strong {
+  font-weight: bold;
+}
+
+.conclusion-box {
+  background-color: #eafffa;
+  border-left: 6px solid #33cc99;
+  padding: 18px 22px;
+  margin: 28px 0 18px 0;
+  border-radius: 7px;
+}
+
+.conclusion-box h3 {
+  margin: 0 0 8px 0;
+  color: #1ca085;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.conclusion-box p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.footer {
+  text-align: center;
+  font-size: 15px;
+  color: #555;
+  margin-top: 30px;
+}
