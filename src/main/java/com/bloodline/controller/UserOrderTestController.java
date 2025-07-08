@@ -18,4 +18,8 @@ public class UserOrderTestController {
     public List<UserOrderTest> getAll() {
         return userOrderTestRepository.findAll();
     }
+    @GetMapping("/by-username/{username}")
+    public List<UserOrderTest> getByUsername(@PathVariable("username") String username) {
+        return userOrderTestRepository.findByUsername(username);
+    }
 }
