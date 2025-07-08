@@ -144,4 +144,35 @@ public class OrderTestController {
         }
     }
 
+    @GetMapping("/stats")
+    public ResponseEntity<?> getSampleStats() {
+        List<Object[]> results = orderTestRepository.countByStatus();
+        Map<String, Integer> stats = new java.util.HashMap<>();
+
+        stats.put("processing", 0);
+        stats.put("pending", 0);
+        stats.put("completed", 0);
+
+        for (Object[] row : results) {
+            String status = String.valueOf(row[0]);
+            int count = ((Number) row[1]).intValue();
+            switch (status) {
+                case "0":
+                case "đang xét nghiệm":
+                    stats.put("processing", count);
+                    break;
+                case "1":
+                case "chờ kết quả":
+                    stats.put("pending", count);
+                    break;
+                case "2":
+                case "đã hoàn thành":
+                    stats.put("completed", count);
+                    break;
+            }
+        }
+
+        return ResponseEntity.ok(stats);
+    }
+
 }
