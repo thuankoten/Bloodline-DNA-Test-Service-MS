@@ -78,22 +78,5 @@ public class AdminReportController {
             return "{\"error\":\"" + e.getMessage() + "\"}";
         }
     }
-
-    // Hàm tách số tiền từ chuỗi label
-    private long extractMoney(String label) {
-        if (label == null) return 0;
-        int idx = label.indexOf("-");
-        if (idx == -1) return 0;
-        String moneyPart = label.substring(idx + 1).trim();
-        java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("(\\d{1,3}(,\\d{3})*)").matcher(moneyPart);
-        if (matcher.find()) {
-            String moneyStr = matcher.group(1).replace(",", "");
-            try {
-                return Long.parseLong(moneyStr);
-            } catch (NumberFormatException e) {
-                return 0;
-            }
-        }
-        return 0;
-    }
+    
 }
