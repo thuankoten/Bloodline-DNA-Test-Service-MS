@@ -92,10 +92,10 @@ document.addEventListener("DOMContentLoaded", function () {
           if (order.status === "0") {
             statusSpan.textContent = "Đang xét nghiệm";
             statusSpan.classList.add("waiting");
-          } else if (order.status === "1") {
+          } else if (order.status === "2") {
             statusSpan.textContent = "Đã hoàn tất";
             statusSpan.classList.add("done");
-          } else if (order.status === "2") {
+          } else if (order.status === "1") {
             statusSpan.textContent = "Chờ kết quả";
             statusSpan.classList.add("pending-result");
           } else {
